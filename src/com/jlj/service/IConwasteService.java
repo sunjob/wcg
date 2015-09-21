@@ -37,18 +37,12 @@ public interface IConwasteService {
 
 	public abstract Conwaste loadById(int id);
 
-	public abstract int getPageCount(int con, String convalue, int status,
-			String publicaccount, int size);
+	public abstract int getPageCount(int totalCount, int size);
 
-	public abstract int getTotalCount(int con, String convalue, int status,
-			String publicaccount);
+	public abstract int getTotalCount(int con, String convalue, int status);
 
 	public abstract List<Conwaste> queryList(int con, String convalue,
-			int status, String publicaccount, int page, int size);
+			int status,  int page, int size);
 
-	public abstract List<Conwaste> getConwastesByPublicAccount(String paccount);
-
-	public abstract List<Conwaste> getFrontConwastesByPublicAccount(
-			String paccount);
 
 }

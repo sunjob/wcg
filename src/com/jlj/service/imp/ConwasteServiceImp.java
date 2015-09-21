@@ -132,26 +132,22 @@ public class ConwasteServiceImp implements IConwasteService {
 	/* (non-Javadoc)
 	 * @see com.jlj.service.imp.IConwasteService#getPageCount(int, java.lang.String, int, java.lang.String, int)
 	 */
-	public int getPageCount(int con, String convalue, int status, String publicaccount,
-			int size) {
-		int totalCount=this.getTotalCount(con, convalue, status, publicaccount);
+	public int getPageCount(int totalCount,int size) {
 		return totalCount%size==0?totalCount/size:(totalCount/size+1);
 	}
 
 	/* (non-Javadoc)
 	 * @see com.jlj.service.imp.IConwasteService#getTotalCount(int, java.lang.String, int, java.lang.String)
 	 */
-	public int getTotalCount(int con, String convalue, int status, String publicaccount) {
-		String queryString = "select count(*) from Conwaste mo where mo.publicaccount=? ";
+	public int getTotalCount(int con, String convalue, int status) {
+		String queryString = "select count(*) from Conwaste mo where 1=1 ";
 		Object[] p = null;
 		if(con!=0&&convalue!=null&&!convalue.equals("")){
 			//大类别名称
 			if(con==1){
 				queryString += "and mo.name like ? "; 
 			}
-			p = new Object[]{publicaccount,'%'+convalue+'%'};
-		}else{
-			p = new Object[]{publicaccount};
+			p = new Object[]{'%'+convalue+'%'};
 		}
 		return conwasteDao.getUniqueResult(queryString,p);
 	}
@@ -160,38 +156,19 @@ public class ConwasteServiceImp implements IConwasteService {
 	 * @see com.jlj.service.imp.IConwasteService#queryList(int, java.lang.String, int, java.lang.String, int, int)
 	 */
 	public List<Conwaste> queryList(int con, String convalue, int status,
-			String publicaccount, int page, int size) {
-		String queryString = "from Conwaste mo where mo.publicaccount=? ";
+			 int page, int size) {
+		String queryString = "from Conwaste mo where 1=1 ";
 		Object[] p = null;
 		if(con!=0&&convalue!=null&&!convalue.equals("")){
 			//大类别名称
 			if(con==1){
 				queryString += "and mo.name like ? "; 
 			}
-			p = new Object[]{publicaccount,'%'+convalue+'%'};
-		}else{
-			p = new Object[]{publicaccount};
+			p = new Object[]{'%'+convalue+'%'};
 		}
-		queryString += " order by mo.orderid asc ";
+		queryString += " order by mo.id desc ";
 		return conwasteDao.pageList(queryString,p,page,size);
 	}
 	
-	/* (non-Javadoc)
-	 * @see com.jlj.service.imp.IConwasteService#getConwastesByPublicAccount(java.lang.String)
-	 */
-	public List<Conwaste> getConwastesByPublicAccount(String paccount) {
-		String queryString = "from Conwaste mo where mo.publicaccount = ? and mo.islinkonly = 0 order by mo.orderid asc ";
-		Object[] p= new Object[]{paccount};
-		return conwasteDao.getObjectsByCondition(queryString, p);
-	}
-	
-	/* (non-Javadoc)
-	 * @see com.jlj.service.imp.IConwasteService#getFrontConwastesByPublicAccount(java.lang.String)
-	 */
-	public List<Conwaste> getFrontConwastesByPublicAccount(String paccount) {
-		String queryString = "from Conwaste mo where mo.publicaccount = ? and mo.isshow = 1 order by mo.orderid asc ";
-		Object[] p= new Object[]{paccount};
-		return conwasteDao.getObjectsByCondition(queryString, p);
-	}
 
 }
