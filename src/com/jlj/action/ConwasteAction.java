@@ -37,7 +37,7 @@ SessionAware,ServletResponseAware,ServletRequestAware {
 	private String[] arg=new String[2];
 	private List<Conwaste> conwastes;
 	private int page;
-	private final int size=10;
+	private final int size=20;
 	private int pageCount;
 	private int totalCount;
 	private int status;//按状态
