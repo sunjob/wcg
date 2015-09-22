@@ -28,11 +28,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
 <div class="pagination">
- <!--  <ul>
+<!-- 
+   <ul>
 
     <li class="disabled"><span>上一页</span></li>
   </ul>
- -->  
+  -->
 </div>
 	<div class="tb-toolbar">
 		
@@ -78,7 +79,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							已审核
 						</s:if>
 						<s:else>
-							未审核
+							<a href="conwasteAction!shenhe?id=<s:property value="id"/>"  onclick="return confirm('你确定审核通过吗？')">未审核</a>
 						</s:else>
 						</span></td>
 						<td>
@@ -90,7 +91,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						
 						<span>
 						[
-						<a href="conwasteAction!delete?id=<s:property value="id"/>" >删除</a>
+						<a href="conwasteAction!delete?id=<s:property value="id"/>"  onclick="return confirm('你确定删除该信息吗？')">删除</a>
 						]
 						</span>
 						
@@ -103,54 +104,49 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 
 
-<div class="pagination">
-  <!-- <ul>
+<div class="pagination" style="text-align: center;height: 25px;">
+   <ul>
 
-    <li class="disabled"><span>上一页</span></li>
-  </ul> -->
+    <li class="disabled">
+    
+    <span>
+			&nbsp;&nbsp;&nbsp; 
+		  <a href="javascript:jumpConPage('conwasteAction!list',1);" target="main">首页</a>&nbsp;&nbsp; 
+		  <a href="javascript:jumpConPage('conwasteAction!list',<s:property value="page-1"/>);" target="main">上一页</a>&nbsp;&nbsp;&nbsp; 
+		  <a href="javascript:jumpConPage('conwasteAction!list',<s:property value="page+1"/>);" target="main">下一页</a>&nbsp;&nbsp;&nbsp; 
+		  <a href="javascript:jumpConPage('conwasteAction!list',<s:property value="pageCount"/>);" target="main">尾页</a>&nbsp;&nbsp;&nbsp;
+		  <input type='button' class="coolbg np" onClick="javascript:jumpConPage('conwasteAction!list',document.getElementById('page').value);" value='转到' />
+		&nbsp;
+		当前页：
+		<input onpaste="return false" onKeyPress="checkPage();" id="page" type="text" name="page" value="<s:property value="page"/>" size="2" style="ime-mode=disabled;width:25px; height:16px;line-height:14px; BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: #cccccc 1px solid; FONT-SIZE: 13px; BORDER-LEFT: #cccccc 1px solid; COLOR: #000000; BORDER-BOTTOM: #cccccc 1px solid; FONT-FAMILY: 宋体; BACKGROUND-COLOR: #ffffff;text-align: center;vertical-align:top;"/>
+		/共<s:property value="pageCount"/>页
+	</span>
+    
+    </li>
+  </ul> 
   
 </div>
 
-<script type="text/javascript">
-$(function() {
-	$("#gotonext").click(function(){
-		window.parent.$('.menu-yuding').trigger('click');
-	});
-});
 
-function dellbs(id,o){
-	if(id=='a'){
-		if(confirm('确定删除这些信息吗？')){
-			var ids = [];
-			$('td').find('input[type="checkbox"]:checked').each(function(){
-				ids[ids.length] = $(this).val();
-			});
-			ajax('microVote-del.html',{ id:ids.join(',')},function(){
-				$('td').find('input[type="checkbox"]:checked').each(function(){
-					$(this).parent().parent().remove();
-				});
-			});	
-		}
-	}else{
-		if(confirm('确定删除此条信息吗？')){
-			ajax('microVote-del.html',{ id:id},function(){
-				$(o).parent().parent().parent().remove();
-			});	
-		}
-	}	
-}
-
-function selallck(o){
-	if($(o).prop('checked')){
-		$('td').find('input[type="checkbox"]').prop('checked',true);
-	}else{
-		$('td').find('input[type="checkbox"]').prop('checked',false);
-	}
-}
-</script>
 
 <div id="gotonext"  >
 	<img src="media/images/admin/v3/yuding.png" ></img>
 </div>
 
-<br/><br/><br/></body></html>
+<br/><br/><br/>
+<SCRIPT type="text/javascript">
+function jumpConPage(url,page){
+	var page=page;
+	if(isNaN(page)){
+		var page2=document.getElementById(page).value;
+		page=parseInt(page2);
+	}
+	
+	var url=url+'?page='+page;
+	url=encodeURI(url);
+	url=encodeURI(url);
+	window.location=url;
+}
+</SCRIPT>
+
+</body></html>

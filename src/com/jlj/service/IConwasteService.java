@@ -44,5 +44,7 @@ public interface IConwasteService {
 	public abstract List<Conwaste> queryList(int con, String convalue,
 			int status,  int page, int size);
 
+	public abstract void updateStatusById(int status, int id);
+
 
 }

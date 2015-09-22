@@ -93,7 +93,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
  		<div class="control-group">
 		    <div class="controls">
-		    
+		    <s:token></s:token>
 		      <button id="save-btn" type="submit" class="btn btn-primary btn-large">保存</button>
 		     
 		    </div>

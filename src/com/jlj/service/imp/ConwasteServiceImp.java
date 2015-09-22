@@ -169,6 +169,12 @@ public class ConwasteServiceImp implements IConwasteService {
 		queryString += " order by mo.id desc ";
 		return conwasteDao.pageList(queryString,p,page,size);
 	}
+	public void updateStatusById(int status, int id) {
+		String hql = "update Conwaste mo set mo.status=:status where mo.id=:id";
+		String[] paramNames = new String[]{"status","id"};
+		Object[] values = new Object[]{status,id};
+		conwasteDao.updateByHql(hql, paramNames, values);
+	}
 	
 
 }

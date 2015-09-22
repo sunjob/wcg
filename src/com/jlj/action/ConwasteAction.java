@@ -84,7 +84,8 @@ SessionAware,ServletResponseAware,ServletRequestAware {
 	 */
 	
 	public String add() throws Exception{
-		
+		String forquery = conwaste.getPerson()+","+conwaste.getPhone()+","+conwaste.getSum();
+		conwaste.setForquery(forquery);
 		conwasteService.add(conwaste);
 		
 		arg[0]="conwasteAction!list";
@@ -108,12 +109,26 @@ SessionAware,ServletResponseAware,ServletRequestAware {
 	 * @return
 	 */
 	public String update() throws Exception{
-		
+		String forquery = conwaste.getPerson()+","+conwaste.getPhone()+","+conwaste.getSum();
+		conwaste.setForquery(forquery);
 		conwasteService.update(conwaste);
 		arg[0]="conwasteAction!list";
 		arg[1]="建筑垃圾准运管理";
 		return SUCCESS;
 	}
+	
+	
+	/**
+	 * 审核信息
+	 * @return
+	 * @throws Exception 
+	 */
+	public String shenhe() throws Exception{
+		int status=1;//审核通过
+		conwasteService.updateStatusById(status,id);
+		return this.list();
+	}
+	
 	/**
 	 * 查看信息
 	 * @return
