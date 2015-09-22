@@ -79,11 +79,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="main_banner"></div>
     <div class="main_banner"></div>
     <div class="main_xtxx_pic"><img src="skin/images/frame/dot/index_r11_c6.jpg" width="47" height="44"></div>
-    <div class="main_xtxx_txt">您的公众账号名称：${pubclient.publicname }
+    <div class="main_xtxx_txt">您的公众账号名称：管理员
 		
 	</div>
     <div class="main_xtxx_pic"><img src="skin/images/frame/dot/index_r11_c14.jpg" alt="" width="46" height="44"></div>
-    <div class="main_xtxx_txt">系统版本信息：vxinsub_v1.0_1</div>
+    <div class="main_xtxx_txt">系统版本信息：wcg_v1.0</div>
   </div>
   <!--  
   <div class="main_cont">

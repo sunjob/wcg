@@ -29,7 +29,7 @@ function countDown(secs,surl){
 <body leftmargin="8" topmargin='8'>
 <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
-    <td><div style='float:left'> <img height="14" src="skin/images/frame/book1.gif" width="20" />&nbsp;39MI公众平台后台管理系统 </div>
+    <td><div style='float:left'> <img height="14" src="skin/images/frame/book1.gif" width="20" />&nbsp;微城管后台管理系统 </div>
       <div style='float:right;padding-right:8px;'>
         <!--  //保留接口  -->
       </div></td>
@@ -98,12 +98,12 @@ function countDown(secs,surl){
   <tr bgcolor="#FFFFFF">
     <td width="25%" bgcolor="#FFFFFF">感谢您的使用：</td>
     <td width="75%" bgcolor="#FFFFFF">
-		${pubclient.publicname }
+		管理员
 	</td>
   </tr>
   <tr bgcolor="#FFFFFF">
     <td>系统版本信息：</td>
-    <td>vxinsub_v1.0_1</td>
+    <td>wcg_v1.0</td>
   </tr>
 </table>
 </body>
