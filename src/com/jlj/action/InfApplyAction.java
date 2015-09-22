@@ -65,7 +65,11 @@ SessionAware,ServletResponseAware,ServletRequestAware {
 //			String result = "未查询到该审批编号";
 //			return "xkzResult";
 //		}
-		
+
+		if(spnumber==null||spnumber.equals("")){
+			String result = "请输入相关内容";
+			return "xkzResult";
+		}
 		List<InfApply> infApplys = infApplyService.getInfApplysByContentId(spnumber);
 		if(infApplys!=null&&infApplys.size()>0){
 			//获取申请查询结果值
@@ -74,10 +78,13 @@ SessionAware,ServletResponseAware,ServletRequestAware {
 			String transactAffairName=infApply.getTransactAffairName();
 			String content=infApply.getContent();
 			String note = "";
+//			System.out.println(internalNo);
 			List<InfApplyProcess> infApplyProcesses = infApplyProcessService.getInfApplyProcessByInternalNo(internalNo);
+//			System.out.println(infApplyProcesses.size());
 			if(infApplyProcesses!=null&&infApplyProcesses.size()>0){
 				InfApplyProcess infApplyProcess = infApplyProcesses.get(0);
 				note = infApplyProcess.getNote();
+//				System.out.println(note);
 			}
 			infApplyVO = new InfApplyVO();
 			infApplyVO.setInternalNo(internalNo);

@@ -61,7 +61,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					
 					</s:if>
 					<s:else>
-						未查询到该审批编号
+						未查询到相关内容
 						
 					</s:else>
 					</div>

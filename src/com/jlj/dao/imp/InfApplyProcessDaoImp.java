@@ -24,11 +24,12 @@ public class InfApplyProcessDaoImp implements IInfApplyProcessDao  {
 		ResultSet rs=null;
 		try {
 			con=DBHelp.getConnection();
-			String sql = "select INTERNAL_NO,NOTE from INF_APPLY_PROCESS where INTERNAL_NO = ? and INTERNAL_NO != null";
+			String sql = "select INTERNAL_NO,NOTE from INF_APPLY_PROCESS where INTERNAL_NO =?";
 			pst=con.prepareStatement(sql);
 			pst.setString(1, internalno);
 			rs=pst.executeQuery();
 			while(rs.next()){
+//				System.out.println("rs.getString:"+rs.getString("NOTE"));
 				InfApplyProcess infApplyProcess=new InfApplyProcess();
 				infApplyProcess.setInternalNo(rs.getString("INTERNAL_NO"));
 				infApplyProcess.setNote(rs.getString("NOTE"));

@@ -99,7 +99,7 @@ public class Conwaste implements java.io.Serializable {
 		this.sum = sum;
 	}
 
-	@Column(name = "carnumber", length = 20)
+	@Column(name = "carnumber", length = 65535)
 	public String getCarnumber() {
 		return carnumber;
 	}
@@ -144,7 +144,7 @@ public class Conwaste implements java.io.Serializable {
 		this.note = note;
 	}
 
-	@Column(name = "forquery", length = 255)
+	@Column(name = "forquery", length = 65535)
 	public String getForquery() {
 		return forquery;
 	}

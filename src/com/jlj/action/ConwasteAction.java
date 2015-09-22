@@ -84,7 +84,7 @@ SessionAware,ServletResponseAware,ServletRequestAware {
 	 */
 	
 	public String add() throws Exception{
-		String forquery = conwaste.getPerson()+","+conwaste.getPhone()+","+conwaste.getSum();
+		String forquery = conwaste.getPerson()+","+conwaste.getPhone()+","+conwaste.getCarnumber();
 		conwaste.setForquery(forquery);
 		conwasteService.add(conwaste);
 		
@@ -109,7 +109,7 @@ SessionAware,ServletResponseAware,ServletRequestAware {
 	 * @return
 	 */
 	public String update() throws Exception{
-		String forquery = conwaste.getPerson()+","+conwaste.getPhone()+","+conwaste.getSum();
+		String forquery = conwaste.getPerson()+","+conwaste.getPhone()+","+conwaste.getCarnumber();
 		conwaste.setForquery(forquery);
 		conwasteService.update(conwaste);
 		arg[0]="conwasteAction!list";
