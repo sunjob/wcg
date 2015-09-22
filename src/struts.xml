@@ -799,5 +799,12 @@
 			<result name="bigwheelend">/front/front_bigwheelend.jsp</result>
 		</action>
 	</package>
+	
+	<package name="complaint" extends="struts-default">
+		<action name="complaintAction" class="complaintAction" >
+			<result name="list">/admin/tousu_manage.jsp</result>
+			<result name="front_addsuccess">/front2/complaint_addsuccess.jsp</result>
+		</action>
+	</package>
 </struts>
 

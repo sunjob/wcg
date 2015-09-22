@@ -1,4 +1,10 @@
-
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="/struts-tags" prefix="s" %>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -87,7 +93,45 @@
             Api.shareToWeibo(wxData, wxCallbacks);
         });
 
-
+	function addComplaint()
+	{
+		var name = document.getElementById('name').value;
+		var telphone = document.getElementById('telphone').value;
+		var comptype = document.getElementById('comptype').value;
+		var content = document.getElementById('content').value;
+		if(name=='')
+		{
+			alert("请输入您的姓名.");
+			return;
+		}
+		if(telphone=='')
+		{
+			alert("请输入您的电话.");
+			return;
+		}
+		if(!(/(^(\d{3,4}-)?\d{7,8})$|(^1[3|4|5|8][0-9]{9})/.test(telphone))){
+	        alert("不是正确的11位手机号,请重新输入.");
+			return;
+	    }
+		if(comptype==0)
+		{
+			alert("请选择投诉类型.");
+			return;
+		}
+		if(content=='')
+		{
+			alert("请输入投诉内容.");
+			return;
+		}
+		runUrl('complaintAction!addComplaint?name='+name+'&telphone='+telphone+'&comptype='+comptype+'&content='+content);
+	}
+	
+	function runUrl(url){	
+		console.log(url);
+		url=encodeURI(url);
+		url=encodeURI(url);
+		window.location=url;
+	}
 
 
     </script>
@@ -130,7 +174,10 @@
 					<table class="kuang" border="0" cellpadding="0" cellspacing="0" width="100%">
 						<tbody><tr>
 							<th>联系人</th>
-							<td><input type="text"   value="" name="newyy_recordT08d9e827ffbba2efe4413cb064bbf847form0" id="newyy_recordform0" class="px" placeholder="请输入您的名字"/></td>
+							<td>
+							<s:textfield name="complaint.name" id="name" cssClass="px" placeholder="请输入您的名字"></s:textfield>
+							
+							</td>
 						</tr>
 					</tbody></table>
 				</li>
@@ -138,7 +185,11 @@
 					<table class="kuang" border="0" cellpadding="0" cellspacing="0" width="100%">
 						<tbody><tr>
 							<th>联系电话</th>
-							<td><input type="text"   value="" name="newyy_recordT08d9e827ffbba2efe4413cb064bbf847form1" id="newyy_recordform1" class="px" placeholder="请输入您的电话"/></td>
+							
+							<td>
+							<s:textfield name="complaint.telphone" id="telphone" cssClass="px" placeholder="请输入您的电话"></s:textfield>
+							
+							</td>
 						</tr>
 					</tbody></table>
 				</li>
@@ -147,7 +198,10 @@
 					<table class="kuang" border="0" cellpadding="0" cellspacing="0" width="100%">
 						<tbody><tr>
 							<th>投诉类型</th>
-							<td><select    name="newyy_recordT08d9e827ffbba2efe4413cb064bbf847form4"  id="newyy_recordform4" class="dropdown-select" yy_autotext="newyy_recordT08d9e827ffbba2efe4413cb064bbf847SEL_TXT_form4"><option value="1" >市容环境</option><option value="2" >黑车</option></select></td>
+							<td>
+								<s:select name="complaint.comptype" id="comptype" cssClass="dropdown-select" list="#{'1':'市容面貌','2':'宣传广告','3':'园林绿化','4':'黑车','5':'城市湖道','6':'街面秩序','7':'施工管理'}" label="投诉类型" headerKey="" headerValue="请选择投诉类型"></s:select> 
+						
+							</td>
 						</tr>
 					</tbody></table>
 				</li>
@@ -156,14 +210,19 @@
 					<table class="kuang" border="0" cellpadding="0" cellspacing="0" width="100%">
 						<tbody><tr>
 							<th>投诉内容</th>
-							<td><textarea name="newyy_recordT08d9e827ffbba2efe4413cb064bbf847form7"   id="newyy_recordform7" class="pxtextarea" style="height:99px;overflow-y:visible" placeholder="请投诉"></textarea></td>
+							<td>
+							
+							
+							<s:textarea name="complaint.content" id="content"  cssClass="pxtextarea" cssStyle="height:99px;overflow-y:visible" placeholder="请投诉"></s:textarea>
+							
+							</td>
 						</tr>
 					</tbody></table>
 				</li>
 								</form>
 			</ul>
 			<div class="footReturn">
-				<a id="showcard" class="submit" href="javascript:void(0);">提交投诉</a>
+				<a id="showcard" class="submit" href="javascript:void(addComplaint());">提交投诉</a>
 				<div class="window" id="windowcenter">
 					<div id="title" class="wtitle">提示<span class="close" id="alertclose"></span></div>
 					<div class="content">
@@ -182,7 +241,7 @@
 	</div>
 </section>
 	<div class="mfooter" id="wxgjfooter" style="text-align: center;width: 100%;height: 20px;line-height: 20px;margin-top:10px;">
-<span class="sp2"><a href="http://weixinrs.com" style="color: #5e5e5e;font-size: 12px;"><!--@39MI提供技术支持--></a></span>
+<span class="sp2"><a href="#" style="color: #5e5e5e;font-size: 12px;"><!--@39MI提供技术支持--></a></span>
 </div>
 <div style="width: 0px;height: 0px;overflow: hidden;">
 
