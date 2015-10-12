@@ -21,7 +21,7 @@ public class Conwaste implements java.io.Serializable {
 	private String unit;
 	private String person;
 	private String phone;
-	private Integer sum;
+	private String sum;
 	private String carnumber;
 	private String line;
 	private String timelimit;
@@ -32,7 +32,7 @@ public class Conwaste implements java.io.Serializable {
 	// Constructors
 	/** full constructor */
 	public Conwaste(Integer id, String unit, String person, String phone,
-			Integer sum, String carnumber, String line, String timelimit,
+			String sum, String carnumber, String line, String timelimit,
 			Integer status, String note,String forquery) {
 		super();
 		this.id = id;
@@ -91,11 +91,11 @@ public class Conwaste implements java.io.Serializable {
 	}
 
 	@Column(name = "sum")
-	public Integer getSum() {
+	public String getSum() {
 		return sum;
 	}
 
-	public void setSum(Integer sum) {
+	public void setSum(String sum) {
 		this.sum = sum;
 	}
 

@@ -62,7 +62,8 @@ $(function(){
 
 function notifyMe() {
         if (!("Notification" in window)) {
-            alert("该浏览器不支持");
+            //alert("该浏览器不支持");
+            return;
         }
         else if (Notification.permission === "granted") {
             var notification = new Notification("标题",{body: "这个是主体"});

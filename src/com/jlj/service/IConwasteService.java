@@ -7,6 +7,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import com.jlj.model.Conwaste;
 import com.jlj.vo.ConwasteVO;
@@ -33,6 +34,12 @@ public interface IConwasteService {
 			@PathParam("param")
 			String param);
 
+	//apk下载提供
+	@GET
+    @Path("/download.apk")
+    @Produces(MediaType.APPLICATION_OCTET_STREAM)
+	public abstract Response downapk();
+	
 	public abstract List<Conwaste> getConwastes();
 
 	public abstract Conwaste loadById(int id);

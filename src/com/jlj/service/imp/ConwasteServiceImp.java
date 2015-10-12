@@ -1,5 +1,6 @@
 package com.jlj.service.imp;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
 
 import com.jlj.dao.IConwasteDao;
 import com.jlj.model.Conwaste;
@@ -114,6 +117,21 @@ public class ConwasteServiceImp implements IConwasteService {
 		}
 		return conwasteVOs;
 	}
+	
+	//apk下载提供
+	@GET
+    @Path("/download.apk")
+    @Produces(MediaType.APPLICATION_OCTET_STREAM)
+	public Response downapk(){
+		String fileaddr=this.getClass().getResource("/").getPath()+"Yxcws.apk";
+//		System.out.println(fileaddr);
+		File file = new File(fileaddr);
+	    ResponseBuilder response = Response.ok((Object) file);
+	    response.header("Content-Disposition", "attachment; filename=Yxcws.apk");
+	    return response.build();
+	}
+	
+	
 	
 	/* (non-Javadoc)
 	 * @see com.jlj.service.imp.IConwasteService#getConwastes()

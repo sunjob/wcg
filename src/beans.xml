@@ -128,10 +128,12 @@
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
 	
 	<bean id="conwasteservice" class="com.jlj.service.imp.ConwasteServiceImp"/>
+	<bean id="sysconfservice" class="com.jlj.service.imp.SysconfServiceImp"/>
 	<!-- 这里的地址很重要，客户端需要通过这个地址来访问WebService -->
 	<jaxrs:server id="restServiceContainer" address="/rest">
 	    <jaxrs:serviceBeans>
 	        <ref bean="conwasteservice"/>
+	        <ref bean="sysconfservice"/>
 	    </jaxrs:serviceBeans>
 	    <jaxrs:extensionMappings>
 	        <entry key="json" value="application/json" />
