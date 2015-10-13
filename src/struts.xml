@@ -23,7 +23,7 @@
         </interceptors>
         
 		<global-results>
-			<result name="adminLogin">/login.jsp</result>
+			<result name="adminLogin">/admin/login.jsp</result>
 			<result name="opsessiongo">/op_sessiongo.jsp</result>
 		</global-results>
 		<action name="custommenuAction" class="custommenuAction">
@@ -56,7 +56,7 @@
         </interceptors>
         
 		<global-results>
-			<result name="adminLogin">/login.jsp</result>
+			<result name="adminLogin">/admin/login.jsp</result>
 			<result name="opsessiongo">/op_sessiongo.jsp</result>
 		</global-results>
 		<action name="reqmessageAction" class="reqmessageAction">
@@ -90,7 +90,7 @@
         </interceptors>
         
 		<global-results>
-			<result name="adminLogin">/login.jsp</result>
+			<result name="adminLogin">/admin/login.jsp</result>
 			<result name="opsessiongo">/op_sessiongo.jsp</result>
 		</global-results>
 		<action name="photoAction" class="photoAction">
@@ -125,7 +125,7 @@
         </interceptors>
         
 		<global-results>
-			<result name="adminLogin">/login.jsp</result>
+			<result name="adminLogin">/admin/login.jsp</result>
 			<result name="opsessiongo">/op_sessiongo.jsp</result>
 		</global-results>
 		<action name="memberAction" class="memberAction">
@@ -164,7 +164,7 @@
         </interceptors>
         
 		<global-results>
-			<result name="adminLogin">/login.jsp</result>
+			<result name="adminLogin">/admin/login.jsp</result>
 			<result name="opsessiongo">/op_sessiongo.jsp</result>
 		</global-results>
 		<action name="keyresAction" class="keyresAction">
@@ -199,7 +199,7 @@
         </interceptors>
         
 		<global-results>
-			<result name="adminLogin">/login.jsp</result>
+			<result name="adminLogin">/admin/login.jsp</result>
 			<result name="opsessiongo">/op_sessiongo.jsp</result>
 		</global-results>
 		<action name="publickeyAction" class="publickeyAction">
@@ -233,7 +233,7 @@
         </interceptors>
         
 		<global-results>
-			<result name="adminLogin">/login.jsp</result>
+			<result name="adminLogin">/admin/login.jsp</result>
 			<result name="opsessiongo">/op_sessiongo.jsp</result>
 		</global-results>
 		<action name="autoresAction" class="autoresAction">
@@ -267,7 +267,7 @@
         </interceptors>
         
 		<global-results>
-			<result name="adminLogin">/login.jsp</result>
+			<result name="adminLogin">/admin/login.jsp</result>
 			<result name="opsessiongo">/op_sessiongo.jsp</result>
 		</global-results>
 		<action name="guanzhuresAction" class="guanzhuresAction">
@@ -301,7 +301,7 @@
         </interceptors>
         
 		<global-results>
-			<result name="adminLogin">/login.jsp</result>
+			<result name="adminLogin">/admin/login.jsp</result>
 			<result name="opsessiongo">/op_sessiongo.jsp</result>
 		</global-results>
 		<action name="fodderarticleAction" class="fodderarticleAction">
@@ -334,7 +334,7 @@
         </interceptors>
         
 		<global-results>
-			<result name="adminLogin">/login.jsp</result>
+			<result name="adminLogin">/admin/login.jsp</result>
 			<result name="opsessiongo">/op_sessiongo.jsp</result>
 		</global-results>
 		<action name="fodderAction" class="fodderAction">
@@ -370,7 +370,7 @@
         </interceptors>
         
 		<global-results>
-			<result name="adminLogin">/login.jsp</result>
+			<result name="adminLogin">/admin/login.jsp</result>
 			<result name="opsessiongo">/op_sessiongo.jsp</result>
 		</global-results>
 		<action name="phototypeAction" class="phototypeAction">
@@ -403,7 +403,7 @@
         </interceptors>
         
 		<global-results>
-			<result name="adminLogin">/login.jsp</result>
+			<result name="adminLogin">/admin/login.jsp</result>
 			<result name="opsessiongo">/op_sessiongo.jsp</result>
 		</global-results>
 		<action name="screenimgAction" class="screenimgAction">
@@ -436,7 +436,7 @@
         </interceptors>
         
 		<global-results>
-			<result name="adminLogin">/login.jsp</result>
+			<result name="adminLogin">/admin/login.jsp</result>
 			<result name="opsessiongo">/op_sessiongo.jsp</result>
 		</global-results>
 		<action name="footerAction" class="footerAction">
@@ -469,7 +469,7 @@
         </interceptors>
         
 		<global-results>
-			<result name="adminLogin">/login.jsp</result>
+			<result name="adminLogin">/admin/login.jsp</result>
 			<result name="opsessiongo">/op_sessiongo.jsp</result>
 		</global-results>
 		<action name="pagearticleAction" class="pagearticleAction">
@@ -530,7 +530,7 @@
         </interceptors>
         
 		<global-results>
-			<result name="adminLogin">/login.jsp</result>
+			<result name="adminLogin">/admin/login.jsp</result>
 			<result name="opsessiongo">/op_sessiongo.jsp</result>
 		</global-results>
 		<action name="sontypeAction" class="sontypeAction">
@@ -572,7 +572,7 @@
         </interceptors>
         
 		<global-results>
-			<result name="adminLogin">/login.jsp</result>
+			<result name="adminLogin">/admin/login.jsp</result>
 			<result name="opsessiongo">/op_sessiongo.jsp</result>
 		</global-results>
 		<action name="bigtypeAction" class="bigtypeAction">
@@ -605,7 +605,7 @@
         </interceptors>
 	
 		<global-results>
-			<result name="adminLogin">/login.jsp</result>
+			<result name="adminLogin">/admin/login.jsp</result>
 			<result name="opsessiongo">/op_sessiongo.jsp</result>
 		</global-results>
 		<action name="toolkitAction" class="toolkitAction">
@@ -640,7 +640,7 @@
         </interceptors>
         
 		<global-results>
-			<result name="adminLogin">/login.jsp</result>
+			<result name="adminLogin">/admin/login.jsp</result>
 			<result name="opsessiongo">/op_sessiongo.jsp</result>
 		</global-results>
 		<action name="hotelAction" class="hotelAction">
@@ -679,7 +679,7 @@
         </interceptors>
         
 		<global-results>
-			<result name="adminLogin">/login.jsp</result>
+			<result name="adminLogin">/admin/login.jsp</result>
 			<result name="opsessiongo">/op_sessiongo.jsp</result>
 		</global-results>
 		<action name="roomAction" class="roomAction">
@@ -729,7 +729,7 @@
         </interceptors>
         
 		<global-results>
-			<result name="adminLogin">/login.jsp</result>
+			<result name="adminLogin">/admin/login.jsp</result>
 			<result name="opsessiongo">/op_sessiongo.jsp</result>
 		</global-results>
 		<action name="bigwheelAction" class="bigwheelAction" >
@@ -761,7 +761,7 @@
         </interceptors>
         
 		<global-results>
-			<result name="adminLogin">/login.jsp</result>
+			<result name="adminLogin">/admin/login.jsp</result>
 			<result name="opsessiongo">/op_sessiongo.jsp</result>
 		</global-results>
 		<action name="prizerAction" class="prizerAction" >
@@ -783,7 +783,7 @@
 	<package name="conwaste" extends="struts-default">
         
 		<global-results>
-			<result name="adminLogin">/login.jsp</result>
+			<result name="adminLogin">/admin/login.jsp</result>
 			<result name="opsessiongo">/op_sessiongo.jsp</result>
 		</global-results>
 		<action name="conwasteAction" class="conwasteAction">
@@ -804,6 +804,31 @@
 		</action>
 	</package>
 	
+	<package name="admin" extends="struts-default">
+        
+		<global-results>
+			<result name="adminLogin">/admin/login.jsp</result>
+			<result name="opsessiongo">/op_sessiongo.jsp</result>
+		</global-results>
+		<action name="adminAction" class="adminAction">
+			<result name="success">/op_success.jsp</result>
+			<result name="fail">/op_failure.jsp</result>
+			<result name="operror">/op_error.jsp</result>
+			
+			<result name="list">/admin/admin_manage.jsp</result>
+			<result name="add">/admin/admin_add.jsp</result>
+			<result name="load">/admin/admin_update.jsp</result>
+			<result name="loadself">/admin/admin_update_self.jsp</result>
+			<result name="loginSucc">/admin/main2.jsp</result>
+			
+			<result name="invalid.token">/op_failure.jsp</result>
+			<interceptor-ref name="defaultStack" />
+            <interceptor-ref name="token" >
+            	<param name="includeMethods">add</param>
+            	<param name="excludeMethods">default</param>
+            </interceptor-ref>
+		</action>
+	</package>
 	
 	<package name="bigwheelfront" extends="struts-default">
 		<action name="bigwheelActionfront" class="bigwheelAction" >

@@ -1,4 +1,10 @@
-
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="/struts-tags" prefix="s" %>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!doctype html>
 <html>
 <head>
@@ -38,7 +44,7 @@
                             <dt>
                               <!--   <img src="http://img.weimob.com/static/2d/f4/76/image/20131125/20131125093622_45962.png" style="width: 88px; height: 88px" class="img-rounded"></dt> -->
                             <dd style="margin-left: 20px;">
-                                <p><strong>jsjlj1989</strong>：<b class="text-warning">欢迎您登陆宜兴市城市管理行政执法局公众平台后台管理系统</b>  
+                                <p><strong>${admin.username}</strong>：<b class="text-warning">欢迎您登陆宜兴市城市管理行政执法局公众平台后台管理系统</b>  
                                                                                             
                                                                                                 
                                 

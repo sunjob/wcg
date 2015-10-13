@@ -30,7 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <td background="skin/images/frame/wbg.gif" bgcolor="#EEF4EA" class='title'><span>消息</span></td>
   </tr>
   <tr bgcolor="#FFFFFF">
-    <td>${errorInfo }&nbsp;&nbsp;<a href="main.jsp" target="main">回到首页</a></td>
+    <td>${errorInfo }&nbsp;&nbsp;<a href="welcom.jsp" target="mainFrame">回到主页</a></td>
   </tr>
 </table>
 <table width="98%" align="center" border="0" cellpadding="4" cellspacing="1" bgcolor="#CBD8AC" style="margin-bottom:8px">

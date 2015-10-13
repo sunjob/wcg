@@ -1,4 +1,10 @@
-
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="/struts-tags" prefix="s" %>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!doctype html>
 <html>
 <head>
@@ -37,11 +43,12 @@
                             </div>
                         </div>
                         <div class="box-content">
-                                                    <form action="/wechat/modifypwd" method="post" class="form-horizontal form-validate">
+                                                    <form action="adminAction!upMyPwd" method="post" class="form-horizontal form-validate" id="pwdform" >
                                 <div class="control-group">
                                     <label class="control-label" for="old_password">原始密码</label>
                                     <div class="controls">
-                                        <input type="password" name="mypwd" id="mypwd" data-rule-required="true" data-rule-rangelength="[1,16]" />
+                                    	<input type="hidden" name="username" value="${admin.username}"/>
+                                        <input type="password" name="oldpwd" id="oldpwd" data-rule-required="true" data-rule-rangelength="[1,16]" />
                                     </div>
                                 </div>
                                 <div class="control-group">
@@ -54,11 +61,12 @@
                                 <div class="control-group">
                                     <label class="control-label" for="repassword">确认密码</label>
                                     <div class="controls">
-                                        <input type="password" name="renewpwd" id="renewpwd" data-rule-required="true" data-rule-equalto="#new_password">
+                                        <input type="password" name="againpwd" id="againpwd" data-rule-required="true" data-rule-equalto="#new_password">
                                     </div>
                                 </div>
                                 <div class="form-actions" id="btn_box">
-                                    <button id="submit-btn" type="button" data-loading-text="提交中..." class="btn btn-primary">保存</button>
+                                	<s:token></s:token>
+                                    <button id="submit-btn" type="button" data-loading-text="提交中..." class="btn btn-primary" onclick="checkform();">保存</button>
                                     <button class="btn" type="button" onclick="javascript:window.history.go(-1);">取消</button>
                                 </div>
                             </form>
@@ -69,44 +77,38 @@
         </div>
     </div>
 	<script type="text/javascript">
-$(function(){
-	 
-  $("#submit-btn").click(function(){
-	  var opwd   = $("#mypwd").val();
-	  var pwd   = $("#newpwd").val();
-	  var pwd1 = $("#renewpwd").val();
-	  var id       = $("#id").val();
-	  if(pwd == '' || pwd1 == '' || opwd == ''){
-		  tusi('请填写完整。');
-		  return false;
-	  }
-	  if(pwd!= pwd1){
-		  tusi('两次密码不一致!');
-		  return false;
-	  }
-	  if(opwd == pwd){
-		  tusi('新旧密码不能相同!');
-		  return false;
-	  }
-	  ajax('updatePwd-'+id+'.html',{ opwd:opwd,pwd:pwd,pwd1:pwd1},function(data){
-		  if(data == 0){
-			  tusi('两次密码不一致!');
-			  return false;
-		  }else if(data == 2){
-			  tusi('不能为空');
-			  return false;
-		  }else{
-			  tusi(data);
-			  setTimeout(function(){
-				  location.href=location.href;
-			  },1500); 
-		  }
-		  
-	  });
-  });
-});
+	function checkform(){
+		var oldpwd = document.getElementById("oldpwd");
+		var newpwd = document.getElementById("newpwd");
+		var againpwd = document.getElementById("againpwd");
+		if(oldpwd.value.length==0||oldpwd.value==''){
+			alert("原始密码不能为空");
+			oldpwd.value="";
+			oldpwd.focus();
+			return false;
+		}
+		if(newpwd.value.length==0||newpwd.value==''){
+			alert("新密码不能为空");
+			newpwd.value="";
+			newpwd.focus();
+			return false;
+		}
+		if(againpwd.value.length==0||againpwd.value==''){
+			alert("确认密码不能为空");
+			againpwd.value="";
+			againpwd.focus();
+			return false;
+		}
+		if(newpwd.value!=againpwd.value){
+			alert("两次密码输入不一致");
+			newpwd.value="";
+			againpwd.value="";
+			newpwd.focus();
+			return false;
+		}
+		document.getElementById('pwdform').submit();
+	}
 
-
-</script>
+	</script>
 <br/><br/><br/></body>
 </html>
