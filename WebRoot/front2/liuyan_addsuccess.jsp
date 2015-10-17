@@ -1,4 +1,10 @@
-
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="/struts-tags" prefix="s" %>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -152,68 +158,54 @@
 					<div id="txt"></div>
 				</div>
 			</div>
- 
-			<div class="history">
-				<div class="history-date">
-					<ul>
-						<a><h2 class="first first1" style="position: relative;">请点击留言</h2></a>
-						<!--<li class="nob  mb"><div class="beizhu">留言审核通过后才会显示在留言墙上！</div></li>-->
-						<li class="green bounceInDown nob ly1" style="display:none">
-							<dl>
-								<dt>
-									<input name="wxname" type="text" class="px" id="wxname1" value="小龙" placeholder="请输入您的昵称">
-								</dt>
-								<dt>
-									<textarea name="info" class="pxtextarea" style=" height:60px;" id="info1" placeholder="请输入留言"></textarea>
-								</dt>
-								<dt><a id="showcard1" class="submit" href="javascript:void(0)">提交留言</a></dt>
-							</dl>
-						</li>
-												<li class="green bounceInDown">
-							<h3>
-								<!-- <img src="http://www.apiwx.com/index/images/logo100x100.jpg"> -->
-								小龙<span>2015-02-13 09:08:02</span>
-								<div class="clr"></div>
-							</h3>
-							<dl>
-								<dt class="hfinfo">我小龙的留言</dt>
-							</dl>
-														<dl class="huifu">
-								<dt>
-									<span>																														<a class="hhbt czan" date="11803" href="javascript:void(0)">回复</a>
-										<p style="display:none;" class="hhly11803">
-											<textarea name="info" class="pxtextarea hly1007"></textarea> 
-										<a class="hhsubmit submit" date="1007" href="javascript:void(0)">确定</a>
-										</p>
-									</span>
-								</dt>
-							</dl>
-														<dl class="huifu">
-								<dt><span>小龙回复：什么都没有？</span></dt>
-							</dl>
-														<dl class="huifu">
-								<dt><span>小龙回复：什么都没有？</span></dt>
-							</dl>
-													</li>
-												<li class="green bounceInDown nob ly2" style="display:none;">
-							<dl>
-								<dt>
-									<input name="wxname" type="text" class="px" id="wxname2" value="小龙" placeholder="请输入您的昵称">
-								</dt>
-								<dt>
-									<textarea name="info" class="pxtextarea" style=" height:60px;" id="info2" placeholder="请输入留言"></textarea>
-								</dt>
-								<dt>
-									<a id="showcard2" class="submit" href="javascript:void(0)">提交留言</a>
-								</dt>
-							</dl>
-						</li>
-						<a><h2 class="first first2" style="position: relative;">请点击留言</h2></a>
-						</ul>
+	<div class="banner">
+	</div>
+	<div class="cardexplain">
+
+
+			<!--后台可控制是否显示-->
+			<ul class="round">
+				<li>
+					<h2>留言简介</h2>
+					<div class="text">您的留言已提交成功.</div>
+					
+				</li>
+				
+			</ul>
+
+<!--<ul class="round">
+                <li>
+                    <a href="myby-483.html" >
+                        <span>我的在线预约</span>
+                    </a>
+                </li>
+            </ul>-->
+		  
+
+			<div class="footReturn">
+				<a id="showcard" class="submit" href="javascript:void();">返回主界面</a>
+				<div class="window" id="windowcenter">
+					<div id="title" class="wtitle">提示<span class="close" id="alertclose"></span></div>
+					<div class="content">
+						<div id="txt"></div>
 					</div>
 				</div>
 			</div>
 		</div>
+	<div class="plugback">
+		<a href="javascript:history.back(-1)">
+			<div class="plugbg themeStyle">
+				<span class="plugback">
+				</span>
+			</div>
+		</a>
+	</div>
+	<div class="mfooter" id="wxgjfooter" style="text-align: center;width: 100%;height: 20px;line-height: 20px;margin-top:10px;">
+<span class="sp2"><a href="#" style="color: #5e5e5e;font-size: 12px;"><!--@39MI提供技术支持--></a></span>
+</div>
+<div style="width: 0px;height: 0px;overflow: hidden;">
+
+</div>
 	<script type="text/javascript">
  	        
     </script>

@@ -31,4 +31,14 @@ public interface IComplaintService {
 
 	public abstract List<Complaint> queryList(String publicaccount);
 
+	public abstract int getPageCount(int con, String convalue, int size);
+
+	public abstract List<Complaint> queryList(int con, String convalue,
+			int page, int size);
+
+	public abstract int getTotalCount(int con, String convalue);
+
+	public abstract List<Complaint> queryList(int comptype, String comptime,
+			String name);
+
 }

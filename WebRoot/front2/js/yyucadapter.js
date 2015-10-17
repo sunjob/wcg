@@ -1,3 +1,4 @@
+
 /**
  * 批量替换 一般字符替换 replaceall效率高 
  * 特殊字符用replaceAll 效率稍低

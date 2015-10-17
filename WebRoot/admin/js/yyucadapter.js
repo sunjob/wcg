@@ -1,3 +1,77 @@
+
+
+function jumpPage(url,page){
+	var page=page;
+	
+	if(isNaN(page)){
+	
+		alert("请输入正确的页数.");
+		return ;
+	}
+	
+	var url=url+'?page='+page;
+	url=encodeURI(url);
+	url=encodeURI(url);
+	window.location=url;
+}
+
+function jumpPage(url,page,con,convalue){
+	var page=page;
+	if(isNaN(page)){
+	
+		alert("请输入正确的页数.");
+		return ;
+	}
+	
+	var url=url+'?page='+page+'&con='+con+'&convalue='+convalue;
+	url=encodeURI(url);
+	url=encodeURI(url);
+	window.location=url;
+}
+$(document).ready(function(){
+	$(".state").click(function(){
+	
+		var id = parseInt($(this).attr("id"));
+		var state = 0;
+		
+  		var spantext = $(this).text();
+  		
+  		if(spantext.indexOf("未办理")!=-1)
+  		{
+			alert("您确定要办理此投诉吗？")  ;	
+			state = 1;
+			$(this).text("办理中");
+					
+  		}else if(spantext.indexOf("办理中")!=-1)
+  		{
+  			alert("您确定此投诉已办理完成吗？")   ;
+  			state = 2;
+  			$(this).text("已办理");
+  		
+  		}else if(spantext.indexOf("已办理")!=-1)
+  		{
+  			alert("您确定此投诉要重新办理吗？")   ;
+  			state = 1;
+  			$(this).text("办理中");
+  		}
+  		console.log(id,state);
+  		$.ajax({   
+	            url:'changeState',//这里是你的action或者servlert的路径地址   
+	            type:'post', //数据发送方式   
+	            data: { "id":id,"compstate":state},
+	            error: function(msg)
+	            { //失败   
+	            },   
+	            success: function(msg)
+	            { //成功
+				}
+			});
+  		
+  		
+	});
+});
+
+
 /**
  * 批量替换 一般字符替换 replaceall效率高 
  * 特殊字符用replaceAll 效率稍低
@@ -1316,3 +1390,6 @@ function binl2b64(binarray)
 function md5(code){
 	  return hex_md5(code);
 }
+
+
+

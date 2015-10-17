@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.List;
 import java.util.Map;
@@ -23,31 +22,34 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.jlj.model.Bigtype;
-import com.jlj.model.Complaint;
+import com.jlj.model.Message;
 import com.jlj.model.Pubclient;
 import com.jlj.service.IBigtypeService;
-import com.jlj.service.IComplaintService;
+import com.jlj.service.IMessageService;
 import com.jlj.service.IPubclientService;
+import com.jlj.util.DateTimeConvertor;
 import com.jlj.util.DateTimeKit;
+import com.jlj.util.IPUtil;
 import com.opensymphony.xwork2.ActionSupport;
 
-@Component("complaintAction")
+@Component("messageAction")
 @Scope("prototype")
-public class ComplaintAction extends ActionSupport implements RequestAware,
+public class MessageAction extends ActionSupport implements RequestAware,
 SessionAware,ServletResponseAware,ServletRequestAware {
 	
 	private static final long serialVersionUID = 1L;
-	private IComplaintService complaintService;
+	private IMessageService messageService;
+	private IPubclientService pubclientService;
 	Map<String,Object> request;
 	Map<String,Object> session;
 	private javax.servlet.http.HttpServletResponse response;
 	private javax.servlet.http.HttpServletRequest req;
 	//单个对象
 	private int id;
-	private Complaint complaint;
+	private Message message;
 	//分页显示
 	private String[] arg=new String[2];
-	private List<Complaint> complaints;
+	private List<Message> messages;
 	private int page;
 	private final int size=10;
 	private int pageCount;
@@ -58,12 +60,23 @@ SessionAware,ServletResponseAware,ServletRequestAware {
 	//条件
 	private int con;
 	private String convalue;
+	
 	private String frontpa;
+	public String frontMessages(){
+		messages = messageService.getFrontMessagesByPublicAccount(frontpa);
+		request.put("messages", messages);
+//		//查询该frontpa所用的模板信息
+//		Pubclient pubclient = pubclientService.queryPubclientByFrontpa(frontpa);
+//		int template = pubclient.getTemplate();
+//		session.put("template", template);
+		return NONE;
+	}
 	//=========后台首页类别=================================================
 	/**
 	 * 首页类别管理
 	 */
 	public String list() throws Exception{
+		
 		if(convalue!=null&&!convalue.equals("")){
 			convalue=URLDecoder.decode(convalue, "utf-8");
 		}
@@ -71,16 +84,15 @@ SessionAware,ServletResponseAware,ServletRequestAware {
 			page=1;
 		}
 		//总页数
-		pageCount=complaintService.getPageCount(con,convalue,size);
+		pageCount=messageService.getPageCount(con,convalue,size);
 		if(page>pageCount&&pageCount!=0){
 			page=pageCount;
 		}
 		//所有当前页记录对象
-		complaints=complaintService.queryList(con,convalue,page,size);
+		messages=messageService.queryList(con,convalue,page,size);
 		//总记录数
-		totalCount=complaintService.getTotalCount(con,convalue);
+		totalCount=messageService.getTotalCount(con,convalue);
 		return "list";
-		
 	}
 	/**
 	 * 跳转到添加页面
@@ -89,10 +101,6 @@ SessionAware,ServletResponseAware,ServletRequestAware {
 	public String goToAdd(){
 		return "add";
 	}
-	
-	
-	
-	
 	/**
 	 * 添加
 	 * @return
@@ -100,17 +108,11 @@ SessionAware,ServletResponseAware,ServletRequestAware {
 	 */
 	
 	public String add() throws Exception{
-		if(picture!=null){
-			String imageName=DateTimeKit.getDateRandom()+pictureFileName.substring(pictureFileName.indexOf("."));
-			this.upload(imageName);
-			complaint.setImage("/"+imageName);
-			
-		}
-		complaint.setCompstate(0);//新增默认投诉状态为 0：未办理 1：办理中 2：已办理
-		complaint.setComptime(DateTimeKit.getLocalTime());
-		complaintService.add(complaint);
-		arg[0]="complaintAction!list";
-		arg[1]="投诉管理";
+		
+		messageService.add(message);
+		
+		arg[0]="messageAction!list";
+		arg[1]="留言管理";
 		return SUCCESS;
 	}
 	/**
@@ -118,17 +120,18 @@ SessionAware,ServletResponseAware,ServletRequestAware {
 	 * @return
 	 */
 	public String delete(){
-		Complaint complaint=complaintService.loadById(id);
-		//删除图片
-		if(complaint.getImage()!=null)
-		{
-			File photofile=new File(ServletActionContext.getServletContext().getRealPath("/")+complaint.getImage());
-			photofile.delete();
+		/*Pubclient pubclient = (Pubclient)session.get("pubclient");
+		if(pubclient==null){
+			String errorInfo="会话失效，请重新登录";
+			request.put("errorInfo", errorInfo);
+			return "operror";
 		}
-		complaintService.delete(complaint);
+		String paccount=pubclient.getPublicaccount();*/
+		message=messageService.loadById(id);
+		messageService.delete(message);
 		
-		arg[0]="complaintAction!list";
-		arg[1]="投诉管理";
+		arg[0]="messageAction!list";
+		arg[1]="留言管理";
 		return SUCCESS;
 	}
 	/**
@@ -136,6 +139,9 @@ SessionAware,ServletResponseAware,ServletRequestAware {
 	 * @return
 	 */
 	public String update() throws Exception{
+		messageService.update(message);
+		arg[0]="messageAction!list";
+		arg[1]="留言管理";
 		return SUCCESS;
 	}
 	/**
@@ -143,7 +149,7 @@ SessionAware,ServletResponseAware,ServletRequestAware {
 	 * @return
 	 */
 	public String view(){
-		complaint=complaintService.loadById(id);
+		message=messageService.loadById(id);
 		return "view";
 	}
 	/**
@@ -151,35 +157,9 @@ SessionAware,ServletResponseAware,ServletRequestAware {
 	 * @return
 	 */
 	public String load() throws Exception{
+		message=messageService.loadById(id);
 		return "load";
 	}
-	
-	/**
-	 * 投诉查询
-	 */
-	private String comptime;
-	public String query()
-	{
-		complaints = complaintService.queryList(comptype,comptime,name);
-		return "query_result";
-	}
-	
-	/**
-	 * 修改状态
-	 */
-	private int compstate;
-	public String changeState()
-	{
-		complaint=complaintService.loadById(id);
-		complaint.setCompstate(compstate);
-		complaintService.update(complaint);
-		return null;
-	}
-	
-	
-	/**
-	 * front 前台添加
-	 */
 	
 	//上传照片
 	private File picture;
@@ -187,7 +167,8 @@ SessionAware,ServletResponseAware,ServletRequestAware {
 	private String pictureFileName;
 	//文件上传
 	public void upload(String imageName) throws Exception{
-		File saved=new File(ServletActionContext.getServletContext().getRealPath("complaintimages"),imageName);
+		String floderName=((Pubclient)session.get("pubclient")).getPublicaccount();
+		File saved=new File(ServletActionContext.getServletContext().getRealPath(floderName),imageName);
 		InputStream ins=null;
 		OutputStream ous=null;
 		try {
@@ -209,64 +190,73 @@ SessionAware,ServletResponseAware,ServletRequestAware {
 		}
 	}
 	
-	
-	public String addFront() throws Exception
+	/**
+	 * 前台
+	 * @return
+	 */
+	public String listMessageFront()
 	{
 		
-		/*
-		 * 获得当前微信用户的openid 暂无
-		 */
-		if(picture!=null){
-			String imageName=DateTimeKit.getDateRandom()+pictureFileName.substring(pictureFileName.indexOf("."));
-			this.upload(imageName);
-			complaint.setImage("/"+imageName);
-			
-		}
-		complaint.setCompstate(0);//新增默认投诉状态为 0：未办理 1：办理中 2：已办理
-		complaint.setComptime(DateTimeKit.getLocalTime());
-		complaintService.add(complaint);
-		return "front_addsuccess";
+		messages = messageService.getFrontMessages();
+		
+		return "frontlist";
 	}
 	
 	
+	private String messagecontent;
 	private String name;
-	private String telphone;
-	private int comptype;
-	private String content;
-	public String addComplaint() throws Exception
+	public String addMessageFront() throws Exception
 	{
-		System.out.println("addComplaint");
-		if(name!=null&&!name.equals("")){
-			name=URLDecoder.decode(name, "utf-8");
-		}
-		if(telphone!=null&&!telphone.equals("")){
-			telphone=URLDecoder.decode(telphone, "utf-8");
-		}
-		if(content!=null&&!content.equals("")){
-			content=URLDecoder.decode(content, "utf-8");
-		}
-		Complaint complaint = new Complaint();
 		
-		if(picture!=null){
-			String imageName=DateTimeKit.getDateRandom()+pictureFileName.substring(pictureFileName.indexOf("."));
-			System.out.println(imageName);
-			this.upload(imageName);
-			File photofile=new File(ServletActionContext.getServletContext().getRealPath("/")+complaint.getImage());
-			photofile.delete();
-			complaint.setImage("/"+imageName);
+		String ip = IPUtil.getIpAddr(req);//获得留言端IP地址
+		if(checkMessageip(ip))
+		{
+			Message message = new Message();
+			message.setMessagecontent(messagecontent);
+			message.setMessageip(ip);
+			message.setName(name);
+			message.setMessagestate(0);//设置留言是否审核 0:未审核 1:已审核
+			message.setIsshow(0);//设置留言页面是否显示为 0:不显示 1:显示
+			message.setMessagetime(DateTimeKit.getLocalTime());
+			
+			messageService.add(message);
+			
+			return "liuyanaddsuccess";
+		}else
+		{
+			return "liuyanadderror";
 		}
 		
-		
-		complaint.setCompstate(0);
-		complaint.setComptime(DateTimeKit.getLocalTime());
-		complaint.setComptype(comptype);
-		complaint.setContent(content);
-		complaint.setName(name);
-		complaint.setTelphone(telphone);
-		complaintService.add(complaint);
-		return "front_addsuccess";
 	}
 	
+	/*
+	 * 检查是否改IP的用户今天已经发过言
+	 */
+	
+	private boolean checkMessageip(String ip)
+	{
+		String localday = DateTimeKit.getLocalDay();
+		
+		messages = messageService.getMessagesByIPAndDay(ip,localday);
+		
+		if(messages!=null&&messages.size()>0)
+		{
+			return false;
+		}else
+		{
+			return true;
+		}
+		
+	}
+	
+	//get、set-------------------------------------------
+	public IMessageService getMessageService() {
+		return messageService;
+	}
+	@Resource
+	public void setMessageService(IMessageService messageService) {
+		this.messageService = messageService;
+	}
 	// 获得HttpServletResponse对象
     public void setServletResponse(HttpServletResponse response)
     {
@@ -295,6 +285,19 @@ SessionAware,ServletResponseAware,ServletRequestAware {
 		this.id = id;
 	}
 	
+	public void setMessage(Message message) {
+		this.message = message;
+	}
+	
+	public Message getMessage() {
+		return message;
+	}
+	public List<Message> getMessages() {
+		return messages;
+	}
+	public void setMessages(List<Message> messages) {
+		this.messages = messages;
+	}
 	public int getPage() {
 		return page;
 	}
@@ -376,24 +379,19 @@ SessionAware,ServletResponseAware,ServletRequestAware {
 		this.frontpa = frontpa;
 	}
 
-	public IComplaintService getComplaintService() {
-		return complaintService;
+	public IPubclientService getPubclientService() {
+		return pubclientService;
 	}
+
 	@Resource
-	public void setComplaintService(IComplaintService complaintService) {
-		this.complaintService = complaintService;
+	public void setPubclientService(IPubclientService pubclientService) {
+		this.pubclientService = pubclientService;
 	}
-	public Complaint getComplaint() {
-		return complaint;
+	public String getMessagecontent() {
+		return messagecontent;
 	}
-	public void setComplaint(Complaint complaint) {
-		this.complaint = complaint;
-	}
-	public List<Complaint> getComplaints() {
-		return complaints;
-	}
-	public void setComplaints(List<Complaint> complaints) {
-		this.complaints = complaints;
+	public void setMessagecontent(String messagecontent) {
+		this.messagecontent = messagecontent;
 	}
 	public String getName() {
 		return name;
@@ -401,38 +399,6 @@ SessionAware,ServletResponseAware,ServletRequestAware {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getTelphone() {
-		return telphone;
-	}
-	public void setTelphone(String telphone) {
-		this.telphone = telphone;
-	}
-	public int getComptype() {
-		return comptype;
-	}
-	public void setComptype(int comptype) {
-		this.comptype = comptype;
-	}
-	public String getContent() {
-		return content;
-	}
-	public void setContent(String content) {
-		this.content = content;
-	}
-	public String getComptime() {
-		return comptime;
-	}
-	public void setComptime(String comptime) {
-		this.comptime = comptime;
-	}
-	public int getCompstate() {
-		return compstate;
-	}
-	public void setCompstate(int compstate) {
-		this.compstate = compstate;
-	}
-	
-	
 	
 	
 }

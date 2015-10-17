@@ -200,13 +200,13 @@ function notifyMe() {
 						</div>
 						<ul class="subnav-menu" style="display: none">
 							<li>
-								<a href="tousu_add.html">新建投诉</a>
+								<a href="tousu_add.jsp">新建投诉</a>
 							</li>
 							<li>
 								<a href="complaintAction!list">代办工作</a>
 							</li>
 							<li>
-								<a href="tousu_query.html">工作查询</a>
+								<a href="tousu_query.jsp">工作查询</a>
 							</li>
 						</ul>
 					</div>
@@ -309,15 +309,21 @@ function notifyMe() {
 							</a>
 						</div>
 						<ul class="subnav-menu" style="display: none">
+						
+						<!-- 
 							<li>
 								<a href="liuyanset.html">留言板设置</a>
 							</li>
+						 -->	
 							<li>
-								<a href="liuyanmg.html">留言管理</a>
+								<a href="messageAction!list">留言管理</a>
 							</li>
+							<!-- 
 							<li>
 								<a href="liuyanhei.html">黑名单管理</a>
 							</li>
+							 -->
+							
 						</ul>
 					</div>
 					<div class="subnav">

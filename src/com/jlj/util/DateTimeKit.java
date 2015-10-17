@@ -1,21 +1,37 @@
 package com.jlj.util;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
+
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 /**
  * 日期、时间工具类
  * @author JLJ&LQ
  *
  */
 public class DateTimeKit {
+	
+	
 	/**
-	 * 得到当前日期与时间,精确到[时:分:秒]
+	 * 得到当前日期与时间,精确到天
+	 * @return
+	 */
+	public static String getLocalDay() {
+		Date date=new Date();
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+		String dateString=sdf.format(date);
+		return dateString;
+	}
+	
+	/**
+	 * 得到当前日期与时间,精确到[时:分]
 	 * @return
 	 */
 	public static String getLocalTime() {
 		Date date=new Date();
-		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		String dateString=sdf.format(date);
 		return dateString;
 	}
@@ -31,5 +47,27 @@ public class DateTimeKit {
 		dateString=dateString+rand;
 		return dateString;
 	}
+	
+    /**  
+     * 计算两个日期之间相差的分钟  
+     * @param smdate 较小的时间 
+     * @param bdate  较大的时间 
+     * @return 相差天数 
+     * @throws ParseException  
+     */    
+    public static int minutesBetweenStr(String smdate,String bdate) throws java.text.ParseException    
+    {    
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");  
+        Date smdateD=sdf.parse(smdate);  
+        Date bdateD=sdf.parse(bdate);  
+        Calendar cal = Calendar.getInstance();    
+        cal.setTime(smdateD);    
+        long time1 = cal.getTimeInMillis();                 
+        cal.setTime(bdateD);    
+        long time2 = cal.getTimeInMillis();         
+        long between_days=(time2-time1)/(1000*60);  
+            
+       return Integer.parseInt(String.valueOf(between_days));           
+    } 
 	
 }

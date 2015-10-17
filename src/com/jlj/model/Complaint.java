@@ -101,7 +101,7 @@ public class Complaint implements java.io.Serializable {
 		this.comptype = comptype;
 	}
 
-	@Column(name = "content", length = 20)
+	@Column(name = "content", length = 1000)
 	public String getContent() {
 		return content;
 	}
