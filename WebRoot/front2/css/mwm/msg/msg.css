@@ -950,7 +950,7 @@ vertical-align: middle;
 
 /*window*/
 .window {
-	width:267px;
+	width:289px;
 	position:absolute;
 	display:none;
 	margin:0px auto 0 -136px;
@@ -989,6 +989,7 @@ vertical-align: middle;
 	min-height:30px;
 	font-size:14px;
 	line-height:20px;
+	
 }
 .window .content p {
 	margin:10px 0 0 0;

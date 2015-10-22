@@ -46,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="control-group">
 	    	<label class="control-label" for="location_p">发起日期</label>
 	    	<div class="controls">
-	    	<input type="date"  name="comptime"    id="micro_surveykssj" class="span4"  onfocus="WdatePicker({ dateFmt:'yyyy-MM-dd HH:mm'})" />	 
+	    	<input type="date"  name="comptime"    id="micro_surveykssj" class="span4"   />	 
 	    	
 	    	   	</div>
 	  	</div>

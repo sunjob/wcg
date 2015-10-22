@@ -188,6 +188,7 @@ function checkform(){
 							function change() {
 							    var pic = document.getElementById("myimage"),
 							        file = document.getElementById("myfile");
+							         console.log(pic,file);
 							    var ext=file.value.substring(file.value.lastIndexOf(".")+1).toLowerCase();
 							    console.log(ext);
 							     // gif在IE浏览器暂时无法显示

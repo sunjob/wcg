@@ -82,7 +82,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div style="TEXT-ALIGN: left" class="STYLE1"><span style="FONT-SIZE: 13px">投诉照片</span></div></td>
 <td colspan="3">
 <div style="TEXT-ALIGN: left">
-	<img alt="暂无图片" src="<%=basePath%>complaintimages${complaint.image}" id="myimage" width="256px" height="256px" />
+	<img alt="暂无图片" src="<%=basePath%>complaintimage${complaint.image}" id="myimage" width="256px" height="256px" />
 </div></td></tr>
 </body>
 </html>

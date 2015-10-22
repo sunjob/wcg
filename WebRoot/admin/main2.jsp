@@ -200,13 +200,13 @@ function notifyMe() {
 						</div>
 						<ul class="subnav-menu" style="display: none">
 							<li>
-								<a href="tousu_add.jsp">新建投诉</a>
+								<a href="complaintAction!goToAdd">新建投诉</a>
 							</li>
 							<li>
 								<a href="complaintAction!list">代办工作</a>
 							</li>
 							<li>
-								<a href="tousu_query.jsp">工作查询</a>
+								<a href="complaintAction!toQuery">工作查询</a>
 							</li>
 						</ul>
 					</div>
@@ -334,10 +334,10 @@ function notifyMe() {
 						</div>
 						<ul class="subnav-menu" style="display: none">
 							<li>
-								<a href="microSurvey.html">调研管理</a>
+								<a href="wdyAction!list">调研管理</a>
 							</li>
 							<li>
-								<a href="microSurveyAdd.html">调研新增</a>
+								<a href="wdyAction!goToAdd">调研新增</a>
 							</li>
 						</ul>
 					</div>
@@ -350,10 +350,10 @@ function notifyMe() {
 						</div>
 						<ul class="subnav-menu" style="display: none">
 							<li>
-								<a href="microVote.html">微投票管理</a>
+								<a href="wvoteAction!list">微投票管理</a>
 							</li>
 							<li>
-								<a href="microVoteAdd-11585.html">微投票新增</a>
+								<a href="wvoteAction!goToAdd">微投票新增</a>
 							</li>
 						</ul>
 					</div>

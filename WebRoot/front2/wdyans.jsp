@@ -1,4 +1,10 @@
-
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="/struts-tags" prefix="s" %>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,35 +38,75 @@
 <div class="wrapper">
 	<img class="bg" src="res/wdy/images/bg.jpg">
 	<div class="question" style="overflow:hidden;">
-		<div class="title">使用微信的人口数量</div>
+		<div class="title"><s:property value="wdy.name"/></div>
 				<div class="tip1">注：本题最多能选择1个答案！</div>
-				
+			
+		<s:if test="wdy.answer1!=null&&wdy.answer1!=''">
 		<div class="options">
 				<div class="option" data-value="1">
 				<img id="img1" class="oimg" src="res/wdy/images/option_bg.png">
 				<img id="img11" class="oimg-sel" src="res/wdy/images/option_sel_bg.png">
 				<div class="text">
-					<div class="otext">3亿</div>
+					<div class="otext"><s:property value="wdy.answer1"/></div>
 				</div>
 			</div>
-						<div class="option" data-value="2">
+		</s:if>	
+		
+		<s:if test="wdy.answer2!=null&&wdy.answer2!=''">
+		<div class="option" data-value="2">
 				<img id="img2" class="oimg" src="res/wdy/images/option_bg.png">
 				<img id="img21" class="oimg-sel" src="res/wdy/images/option_sel_bg.png">
 				<div class="text">
-					<div class="otext">9亿</div>
+					<div class="otext"><s:property value="wdy.answer2"/></div>
 				</div>
 			</div>
-						<div class="option" data-value="3">
+		</s:if>
+			
+			<s:if test="wdy.answer3!=null&&wdy.answer3!=''">
+		<div class="option" data-value="3">
 				<img id="img3" class="oimg" src="res/wdy/images/option_bg.png">
 				<img id="img31" class="oimg-sel" src="res/wdy/images/option_sel_bg.png">
 				<div class="text">
-					<div class="otext">10亿</div>
+					<div class="otext"><s:property value="wdy.answer3"/></div>
 				</div>
 			</div>
+			</s:if>
+			
+			<s:if test="wdy.answer4!=null&&wdy.answer4!=''">
+		<div class="option" data-value="4">
+				<img id="img4" class="oimg" src="res/wdy/images/option_bg.png">
+				<img id="img41" class="oimg-sel" src="res/wdy/images/option_sel_bg.png">
+				<div class="text">
+					<div class="otext"><s:property value="wdy.answer4"/></div>
+				</div>
+			</div>
+			</s:if>
+			
+			<s:if test="wdy.answer5!=null&&wdy.answer5!=''">
+		<div class="option" data-value="5">
+				<img id="img5" class="oimg" src="res/wdy/images/option_bg.png">
+				<img id="img51" class="oimg-sel" src="res/wdy/images/option_sel_bg.png">
+				<div class="text">
+					<div class="otext"><s:property value="wdy.answer5"/></div>
+				</div>
+			</div>
+			</s:if>
+			
+			<s:if test="wdy.answer6!=null&&wdy.answer6!=''">
+		<div class="option" data-value="6">
+				<img id="img6" class="oimg" src="res/wdy/images/option_bg.png">
+				<img id="img61" class="oimg-sel" src="res/wdy/images/option_sel_bg.png">
+				<div class="text">
+					<div class="otext"><s:property value="wdy.answer6"/></div>
+				</div>
+			</div>
+			</s:if>
+							
+							
 									
 
 		</div>
-		<div id="submit" onclick="window.location.href='wdyyj-10972.html'">
+		<div id="submit" onclick="gotonext()">
 			<img src="res/wdy/images/next_btn.png">
 			<span>下一步</span>
 		</div>
@@ -68,19 +114,27 @@
  	<p class="page-url">
 		<a href="/" target="_blank" class="page-url-link"></a>
 	</p>
-</div>
 <script type="text/javascript">
 function gotonext(){
-	var res = [];
-	$('.option[sel="sel"]').each(function(){
-		res[res.length] = $(this).attr('data-value');
-	});
-	if(res.length==0){
-		tusi('请选择答案');
-		return;
+
+	var username = '<s:property value="username"/>';
+	var telphone = '<s:property value="telphone"/>';
+	var wdyid = '<s:property value="wdy.id"/>';
+	var res = $('.option[sel="sel"]').attr('data-value');
+
+	if($.trim(res)==''){
+
+		alert('请选择答案');
+
 	}else{
-		location.href = 'wdyans-10972-'+res.join('@')+'.html';
+		var url = 'wdyAction!selectAnswer?wdyid='+wdyid+'&answerNumber='+parseInt(res)+'&username='+username+'&telphone='+telphone;
+		console.log(url);
+		url=encodeURI(url);
+		url=encodeURI(url);
+		location.href= url;
 	}
+	
+
 }
 </script>
 <div class="mfooter" id="wxgjfooter" style="text-align: center;width: 100%;height: 20px;line-height: 20px;margin-top:10px;">

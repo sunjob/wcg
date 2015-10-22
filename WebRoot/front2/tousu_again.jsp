@@ -110,7 +110,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<ul class="round">
 				<li>
 					<h2>投诉简介</h2>
-					<div class="text">您的投诉已提交成功,我们会尽快为您处理.</div>
+					<div class="text">您的投诉上个投诉还在处理,请耐心等待,我们会尽快为您处理.</div>
 					
 				</li>
 				

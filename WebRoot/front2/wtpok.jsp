@@ -1,4 +1,10 @@
-
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="/struts-tags" prefix="s" %>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html>
 
 <html>
@@ -18,9 +24,10 @@
 <title>微投票活动</title>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/yyucadapter.js"></script>
-<link rel="stylesheet" type="text/css" href="css/mwm/msg/msg.css" media="all" />	
+
 <link type="text/css" rel="stylesheet" href="res/wtp/style/vote.css" />
 <script type="text/javascript" src="res/choujiang/js/WeixinApi.js"></script>
+
 </head>
 
 <body style="background:#ab7cb3">
@@ -89,87 +96,121 @@
             // 点击分享到腾讯微博，会执行下面这个代码
             Api.shareToWeibo(wxData, wxCallbacks);
         });
-        
-        $(document).ready(function(){
-			$("#windowclosebutton").click(function () { 
-				$("#windowcenter").slideUp(500);
-			});
-			//
-			$("#alertclose").click(function () { 
-				$("#windowcenter").slideUp(500);
-			});
-		});
-	
-		
-		function alert(title){ 
-			window.scrollTo(0, -1);
-			$("#windowcenter").slideToggle("slow"); 
-			$("#txt").html(title);
-			setTimeout(function(){ $("#windowcenter").slideUp(500);},4000);
-		}
-		
-		function checkform(){
-		var username = document.getElementById('username').value;
-		var telphone = document.getElementById('telphone').value;
-		
-		
-		if(username=='')
-		{
-			alert("请输入您的姓名.");
-			return false;
-		}
-		if(telphone=='')
-		{
-			alert("请输入您的电话.");
-			return false;
-		}
-		if(!(/(^(\d{3,4}-)?\d{7,8})$|(^1[3|4|5|8][0-9]{9})/.test(telphone))){
-	        alert("不是正确的11位手机号,请重新输入.");
-			return false;
-	    }
-	return true;
-}
-		
     </script>
 
-<div class="wrapper">
+<div class="wrapper" style="margin-top:-8px;">
 
-		<div class="cardexplain">
-			<div class="window" id="windowcenter">
-				<div id="title" class="wtitle">操作提示<span class="close" id="alertclose"></span></div>
-				<div class="content">
-					<div id="txt"></div>
-				</div>
-			</div>
+	
 
-	<div class="inner-cont">
+	<div class="top fn-clear">
 
-		<div class="qtitle">请先填写您的资料：</div>
-	<form action="wvoteAction!goToOptions" method="post" id="theform"  onsubmit="return checkform();">
-		<div class="field-contain">
+		<div class="count-cont">
 
-			<label for="username" class="input-labe">请输入您的名称:</label>
+			<h3>参与人数</h3>
 
-			<input type="text" name="username" id="username" class="input-text" >
+			<div class="count"><s:property value="wvote.number"/></div>
 
 		</div>
 
-		<div class="field-contain">
+		<div class="title-cont">
 
-			<label for="phone" class="input-labe">请输入您的手机号码:</label>
+			<p class="title"><s:property value="wvote.name"/></p>
 
-			<input type="tel" name="telphone" id="telphone" class="input-text" >
-
-			<span class="tip">*请务必填写正确，此手机号将作为您以后领奖的依据</span>
+			<p class="timeout"><img class="clock" src="res/wtp/images/clock.png"><span class="text">距离投票结束还有<s:property value="wvoteVO.diffdays"/>天 </span></p>
 
 		</div>
 
-		<div class="btn-wrapper">
+	</div>
 
-			<input type="submit" value="开始投票" class="next-btn"></input>
+	<div class="cover">
+
+		<img class="line" src="res/wtp/images/ctline.jpg">
+
+		<img class="cimg" src="ups/demopic.jpg">
+
+		<img class="line" src="res/wtp/images/cbline.jpg">
+
+	</div>
+
+	<div class="summary"><s:property value="wvote.content"/></div>
+
+
+	<div class="option-cont">
+
+	
+
+	
+	   <s:iterator value="woptionfrontVOs" var="woptionVO" status="status">
+		<div class="option fn-clear option-statis" data-value="0">
+
+			<div>${name}</div>
+
+			<div class="progress"><div data-per="56.52" class="bar bar0" style="width:${pecent}%;"></div></div><span class="per" style="left: 102.78px;">${number}(${pecent}%)</span>	
 
 		</div>
-	</form>
+
+		<img class="sep" src="res/wtp/images/option_sep.jpg">
+		</s:iterator>
+	
+	
+			<!--  
+		<div class="option fn-clear option-statis" data-value="0">
+
+			<div>大转盘</div>
+
+			<div class="progress"><div data-per="56.52" class="bar bar0" style="width:10%;"></div></div><span class="per" style="left: 102.78px;">0(0%)</span>	
+
+		</div>
+
+		<img class="sep" src="res/wtp/images/option_sep.jpg">
+
+	
+	
+			
+		<div class="option fn-clear option-statis" data-value="0">
+
+			<div>微官网</div>
+
+			<div class="progress"><div data-per="56.52" class="bar bar0" style="width:0%;"></div></div><span class="per" style="left: 102.78px;">0(0%)</span>	
+
+		</div>
+
+		<img class="sep" src="res/wtp/images/option_sep.jpg">
+
+	
+	
+
+	
+			
+		<div class="option fn-clear option-statis" data-value="0">
+
+			<div>微团购</div>
+
+			<div class="progress"><div data-per="56.52" class="bar bar0" style="width:0%;"></div></div><span class="per" style="left: 102.78px;">0(0%)</span>	
+
+		</div>
+-->
+		<img class="sep" src="res/wtp/images/option_sep.jpg">
+
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+		<a class="next-btn" href="index.html" style="text-decoration:none;">谢谢参与</a>
+
+
+
+
 	</div>
 
  	<p class="page-url">
@@ -179,34 +220,6 @@
 	</p>
 
 </div>
-
-<script type="text/javascript">
-
-function lingqu(){
-
-	var un = $.trim($('#un').val());
-
-	var tel = $.trim($('#tel').val());
-
-	if(un=='' || tel==''){
-
-		tusi('请完善用户信息');
-
-		return;
-
-	}
-
-	ajax('wtp-add.html',{ tel:tel,un:un,id:'11585'},function(m){
-
-		location.href='wtpans-11585.html';
-
-	});	
-
-}
-
-
-
-</script>
 
 <div class="mfooter" id="wxgjfooter" style="text-align: center;width: 100%;height: 20px;line-height: 20px;margin-top:10px;">
 <span class="sp2"><a href="http://weixinrs.com" style="color: #5e5e5e;font-size: 12px;"><!--@39MI提供技术支持--></a></span>

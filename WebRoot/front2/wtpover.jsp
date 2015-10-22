@@ -1,4 +1,10 @@
-
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="/struts-tags" prefix="s" %>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html>
 
 <html>
@@ -15,12 +21,41 @@
 
 <meta name="format-detection" content="telephone=no">
 
-<title>微投票活动</title>
+<title>微投票活动结束</title>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/yyucadapter.js"></script>
-<link rel="stylesheet" type="text/css" href="css/mwm/msg/msg.css" media="all" />	
+
 <link type="text/css" rel="stylesheet" href="res/wtp/style/vote.css" />
-<script type="text/javascript" src="res/choujiang/js/WeixinApi.js"></script>
+
+<script type="text/javascript">
+
+	$(function(){
+
+		$('.option').click(function(){
+
+			$('.option').each(function(){
+
+				$(this).find('img').eq(0).show();
+
+				$(this).find('img').eq(1).hide();
+
+				$(this).attr('sel','0');
+
+			});
+
+			$(this).find('img').eq(0).hide();
+
+			$(this).find('img').eq(1).show();
+
+			$(this).attr('sel','sel');		
+
+		});		
+
+	});
+
+</script>
+<script type="text/javascript" src="/res/choujiang/js/WeixinApi.js"></script>
+
 </head>
 
 <body style="background:#ab7cb3">
@@ -34,7 +69,7 @@
             var wxData = {
                 "appId": "", // 服务号可以填写appId
                 //"imgUrl": 'http://www.weixinrs.com/res/share/wtp.jpg',
-				"imgUrl": "http://www.weixinrs.com/upload/auto/2014/06/04/60b2086e3a9b702c49761e1ba40b22be.jpg",
+				"imgUrl": "ups/demopic.jpg",
                 "img_width": "271",
                 "img_height": "271",
                 "link": mysharelink,
@@ -89,124 +124,34 @@
             // 点击分享到腾讯微博，会执行下面这个代码
             Api.shareToWeibo(wxData, wxCallbacks);
         });
-        
-        $(document).ready(function(){
-			$("#windowclosebutton").click(function () { 
-				$("#windowcenter").slideUp(500);
-			});
-			//
-			$("#alertclose").click(function () { 
-				$("#windowcenter").slideUp(500);
-			});
-		});
-	
-		
-		function alert(title){ 
-			window.scrollTo(0, -1);
-			$("#windowcenter").slideToggle("slow"); 
-			$("#txt").html(title);
-			setTimeout(function(){ $("#windowcenter").slideUp(500);},4000);
-		}
-		
-		function checkform(){
-		var username = document.getElementById('username').value;
-		var telphone = document.getElementById('telphone').value;
-		
-		
-		if(username=='')
-		{
-			alert("请输入您的姓名.");
-			return false;
-		}
-		if(telphone=='')
-		{
-			alert("请输入您的电话.");
-			return false;
-		}
-		if(!(/(^(\d{3,4}-)?\d{7,8})$|(^1[3|4|5|8][0-9]{9})/.test(telphone))){
-	        alert("不是正确的11位手机号,请重新输入.");
-			return false;
-	    }
-	return true;
-}
-		
     </script>
 
-<div class="wrapper">
+<div class="wrapper" style="margin-top:-8px;">
 
-		<div class="cardexplain">
-			<div class="window" id="windowcenter">
-				<div id="title" class="wtitle">操作提示<span class="close" id="alertclose"></span></div>
-				<div class="content">
-					<div id="txt"></div>
-				</div>
-			</div>
+	
 
-	<div class="inner-cont">
+	<div class="top fn-clear">
 
-		<div class="qtitle">请先填写您的资料：</div>
-	<form action="wvoteAction!goToOptions" method="post" id="theform"  onsubmit="return checkform();">
-		<div class="field-contain">
+		<div class="count-cont">
 
-			<label for="username" class="input-labe">请输入您的名称:</label>
+			<h3>参与人数</h3>
 
-			<input type="text" name="username" id="username" class="input-text" >
+			<div class="count">0</div>
 
 		</div>
 
-		<div class="field-contain">
+		<div class="title-cont">
 
-			<label for="phone" class="input-labe">请输入您的手机号码:</label>
+			<p class="title">对不起,当前活动已结束,感谢您的参与.</p>
 
-			<input type="tel" name="telphone" id="telphone" class="input-text" >
+			<p class="timeout"><img class="clock" src="res/wtp/images/clock.png"><span class="text">距离投票结束还有0天 0小时0分0秒</span></p>
 
-			<span class="tip">*请务必填写正确，此手机号将作为您以后领奖的依据</span>
 
+			<a class="next-btn" href="index.html" style="text-decoration:none;">谢谢参与</a>
 		</div>
 
-		<div class="btn-wrapper">
-
-			<input type="submit" value="开始投票" class="next-btn"></input>
-
-		</div>
-	</form>
 	</div>
 
- 	<p class="page-url">
-
-		<a href="/" target="_blank" class="page-url-link"></a>
-
-	</p>
-
-</div>
-
-<script type="text/javascript">
-
-function lingqu(){
-
-	var un = $.trim($('#un').val());
-
-	var tel = $.trim($('#tel').val());
-
-	if(un=='' || tel==''){
-
-		tusi('请完善用户信息');
-
-		return;
-
-	}
-
-	ajax('wtp-add.html',{ tel:tel,un:un,id:'11585'},function(m){
-
-		location.href='wtpans-11585.html';
-
-	});	
-
-}
-
-
-
-</script>
 
 <div class="mfooter" id="wxgjfooter" style="text-align: center;width: 100%;height: 20px;line-height: 20px;margin-top:10px;">
 <span class="sp2"><a href="http://weixinrs.com" style="color: #5e5e5e;font-size: 12px;"><!--@39MI提供技术支持--></a></span>

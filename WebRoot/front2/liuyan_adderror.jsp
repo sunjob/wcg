@@ -182,7 +182,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  
 
 			<div class="footReturn">
-				<a id="showcard" class="submit" href="javascript:void();">返回主界面</a>
+				<a id="showcard" class="submit" href="index.html">返回主界面</a>
 				<div class="window" id="windowcenter">
 					<div id="title" class="wtitle">提示<span class="close" id="alertclose"></span></div>
 					<div class="content">

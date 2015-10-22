@@ -147,10 +147,10 @@ public class ComplaintServiceImp implements IComplaintService {
 		return complaintDao.getObjectsByCondition(queryString, p);
 	}
 
-	public List<Complaint> queryList(String publicaccount) {
+	public List<Complaint> queryList(String ip) {
 
-		String queryString = "from Complaint bw where bw.publicaccount = ? order by bw.id desc ";
-		Object[] p = new Object[] { publicaccount };
+		String queryString = "from Complaint bw where bw.ip = ? order by bw.id desc ";
+		Object[] p = new Object[] { ip };
 		return complaintDao.getObjectsByCondition(queryString, p);
 	}
 

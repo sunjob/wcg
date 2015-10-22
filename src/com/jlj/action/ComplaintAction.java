@@ -29,6 +29,7 @@ import com.jlj.service.IBigtypeService;
 import com.jlj.service.IComplaintService;
 import com.jlj.service.IPubclientService;
 import com.jlj.util.DateTimeKit;
+import com.jlj.util.IPUtil;
 import com.opensymphony.xwork2.ActionSupport;
 
 @Component("complaintAction")
@@ -122,7 +123,7 @@ SessionAware,ServletResponseAware,ServletRequestAware {
 		//删除图片
 		if(complaint.getImage()!=null)
 		{
-			File photofile=new File(ServletActionContext.getServletContext().getRealPath("/")+complaint.getImage());
+			File photofile=new File(ServletActionContext.getServletContext().getRealPath("/")+"complaintimage/"+complaint.getImage());
 			photofile.delete();
 		}
 		complaintService.delete(complaint);
@@ -153,6 +154,13 @@ SessionAware,ServletResponseAware,ServletRequestAware {
 	public String load() throws Exception{
 		return "load";
 	}
+	/**
+	 * 跳转到投诉查询
+	 */
+	public String toQuery()
+	{
+		return "query";
+	}
 	
 	/**
 	 * 投诉查询
@@ -181,13 +189,18 @@ SessionAware,ServletResponseAware,ServletRequestAware {
 	 * front 前台添加
 	 */
 	
+	public String goToComplaint()
+	{
+		return "complaint";
+	}
+	
 	//上传照片
 	private File picture;
 	private String pictureContentType;
 	private String pictureFileName;
 	//文件上传
 	public void upload(String imageName) throws Exception{
-		File saved=new File(ServletActionContext.getServletContext().getRealPath("complaintimages"),imageName);
+		File saved=new File(ServletActionContext.getServletContext().getRealPath("complaintimage"),imageName);
 		InputStream ins=null;
 		OutputStream ous=null;
 		try {
@@ -213,22 +226,59 @@ SessionAware,ServletResponseAware,ServletRequestAware {
 	public String addFront() throws Exception
 	{
 		
-		/*
-		 * 获得当前微信用户的openid 暂无
-		 */
-		if(picture!=null){
-			String imageName=DateTimeKit.getDateRandom()+pictureFileName.substring(pictureFileName.indexOf("."));
-			this.upload(imageName);
-			complaint.setImage("/"+imageName);
-			
+		String ip = IPUtil.getIpAddr(req);//获得IP地址
+		if(checkComplaint(ip))//判断是否已经投诉并且还未处理
+		{
+			return "liuyanagain";
+		}else
+		{
+			/*
+			 * 获得当前微信用户的openid 暂无
+			 */
+			if(picture!=null){
+				String imageName=DateTimeKit.getDateRandom()+pictureFileName.substring(pictureFileName.indexOf("."));
+				this.upload(imageName);
+				complaint.setImage("/"+imageName);
+				
+			}
+			complaint.setIp(ip);
+			complaint.setCompstate(0);//新增默认投诉状态为 0：未办理 1：办理中 2：已办理
+			complaint.setComptime(DateTimeKit.getLocalTime());
+			complaintService.add(complaint);
+			return "front_addsuccess";
 		}
-		complaint.setCompstate(0);//新增默认投诉状态为 0：未办理 1：办理中 2：已办理
-		complaint.setComptime(DateTimeKit.getLocalTime());
-		complaintService.add(complaint);
-		return "front_addsuccess";
+		
 	}
 	
-	
+	/*
+	 * 检查投诉是否已经受理 
+	 */
+	private boolean checkComplaint(String ip) {
+		// TODO Auto-generated method stub
+		
+		complaints = complaintService.queryList(ip);
+		
+		if(complaints==null)
+		{
+			return false;
+		}else
+		{
+			if(complaints.size()>0)
+			{
+				for (Complaint complaint : complaints) {
+					if(complaint.getCompstate()!=2)
+					{
+						return true;
+					}
+				}
+			}else
+			{
+				return false;
+			}
+		}
+		return false;
+	}
+
 	private String name;
 	private String telphone;
 	private int comptype;
@@ -251,7 +301,7 @@ SessionAware,ServletResponseAware,ServletRequestAware {
 			String imageName=DateTimeKit.getDateRandom()+pictureFileName.substring(pictureFileName.indexOf("."));
 			System.out.println(imageName);
 			this.upload(imageName);
-			File photofile=new File(ServletActionContext.getServletContext().getRealPath("/")+complaint.getImage());
+			File photofile=new File(ServletActionContext.getServletContext().getRealPath("/")+"complaintimage/"+complaint.getImage());
 			photofile.delete();
 			complaint.setImage("/"+imageName);
 		}

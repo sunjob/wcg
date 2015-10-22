@@ -34,6 +34,7 @@ public class Complaint implements java.io.Serializable {
 	private String comptime;
 	private Integer compstate;
 	private String image;
+	private String ip;
 	// Constructors
 
 	/** default constructor */
@@ -135,6 +136,15 @@ public class Complaint implements java.io.Serializable {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	@Column(name = "ip", length = 30)
+	public String getIp() {
+		return ip;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
 	}
 
 	

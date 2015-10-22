@@ -29,7 +29,7 @@ public interface IComplaintService {
 
 	public abstract List<Complaint> queryListByPublicAccount(String publicaccount);
 
-	public abstract List<Complaint> queryList(String publicaccount);
+	public abstract List<Complaint> queryList(String ip);
 
 	public abstract int getPageCount(int con, String convalue, int size);
 

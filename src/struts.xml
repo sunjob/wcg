@@ -863,10 +863,15 @@
 			<result name="add">/admin/tousu_add.jsp</result>
 			<result name="load">/admin/tousu_update.jsp</result>
 			<result name="view">/admin/tousu_detail.jsp</result>
+			<result name="query">/admin/tousu_query.jsp</result>
 			<result name="query_result">/admin/tousu_query_result.jsp</result>
 			<result name="loadself">/admin/tousu_update_self.jsp</result>
 			<result name="loginSucc">/admin/main2.jsp</result>
+			
+			<result name="complaint">/front2/yyfront.jsp</result>
 			<result name="front_addsuccess">/front2/tousu_addsuccess.jsp</result>
+			<result name="liuyanagain">/front2/tousu_again.jsp</result>
+			
 			<result name="invalid.token">/op_failure.jsp</result>
 			<interceptor-ref name="defaultStack" />
             <interceptor-ref name="token" >
@@ -897,6 +902,66 @@
 			<result name="liuyanadderror">/front2/liuyan_adderror.jsp</result>
 			<result name="frontlist">/front2/liuyan.jsp</result>
 			
+			
+			<result name="invalid.token">/op_failure.jsp</result>
+			<interceptor-ref name="defaultStack" />
+            <interceptor-ref name="token" >
+            	<param name="includeMethods">add,update</param>
+            	<param name="excludeMethods">default</param>
+            </interceptor-ref>
+		</action>
+	</package>
+	
+	
+	<package name="wvote" extends="struts-default">
+		<global-results>
+			<result name="adminLogin">/admin/login.jsp</result>
+			<result name="opsessiongo">/op_sessiongo.jsp</result>
+		</global-results>
+		<action name="wvoteAction" class="wvoteAction">
+			<result name="success">/op_success.jsp</result>
+			<result name="fail">/op_failure.jsp</result>
+			<result name="operror">/op_error.jsp</result>
+			
+			<result name="list">/admin/wvote_manage.jsp</result>
+			<result name="add">/admin/wvote_add.jsp</result>
+			<result name="load">/admin/wvote_update.jsp</result>
+			<result name="view">/admin/wvote_view.jsp</result>
+			
+			<result name="wtpagain">/front2/wtpagain.jsp</result>
+			<result name="options">/front2/wtpoptions.jsp</result>
+			<result name="wtpover">/front2/wtpover.jsp</result>
+			<result name="wtpok">/front2/wtpok.jsp</result>
+			
+			<result name="invalid.token">/op_failure.jsp</result>
+			<interceptor-ref name="defaultStack" />
+            <interceptor-ref name="token" >
+            	<param name="includeMethods">add,update</param>
+            	<param name="excludeMethods">default</param>
+            </interceptor-ref>
+		</action>
+	</package>
+	
+	
+	<package name="wdy" extends="struts-default">
+		<global-results>
+			<result name="adminLogin">/admin/login.jsp</result>
+			<result name="opsessiongo">/op_sessiongo.jsp</result>
+		</global-results>
+		<action name="wdyAction" class="wdyAction">
+			<result name="success">/op_success.jsp</result>
+			<result name="fail">/op_failure.jsp</result>
+			<result name="operror">/op_error.jsp</result>
+			
+			<result name="list">/admin/wdy_manage.jsp</result>
+			<result name="add">/admin/wdy_add.jsp</result>
+			<result name="load">/admin/wdy_update.jsp</result>
+			<result name="view">/admin/wdy_view.jsp</result>
+			
+			<result name="wdyagain">/front2/wdyagain.jsp</result>
+			<result name="answers">/front2/wdyans.jsp</result>
+			<result name="wdyover">/front2/wdyover.jsp</result>
+			<result name="wdyok">/front2/wdyok.jsp</result>
 			
 			<result name="invalid.token">/op_failure.jsp</result>
 			<interceptor-ref name="defaultStack" />

@@ -1,4 +1,10 @@
-
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="/struts-tags" prefix="s" %>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html>
 
 <html>
@@ -15,12 +21,40 @@
 
 <meta name="format-detection" content="telephone=no">
 
-<title>微投票活动开始啦？【所有设置为演示版，请修改】</title>
+<title>微投票活动重复</title>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/yyucadapter.js"></script>
 
 <link type="text/css" rel="stylesheet" href="res/wtp/style/vote.css" />
-<script type="text/javascript" src="res/choujiang/js/WeixinApi.js"></script>
+
+<script type="text/javascript">
+
+	$(function(){
+
+		$('.option').click(function(){
+
+			$('.option').each(function(){
+
+				$(this).find('img').eq(0).show();
+
+				$(this).find('img').eq(1).hide();
+
+				$(this).attr('sel','0');
+
+			});
+
+			$(this).find('img').eq(0).hide();
+
+			$(this).find('img').eq(1).show();
+
+			$(this).attr('sel','sel');		
+
+		});		
+
+	});
+
+</script>
+<script type="text/javascript" src="/res/choujiang/js/WeixinApi.js"></script>
 
 </head>
 
@@ -35,7 +69,7 @@
             var wxData = {
                 "appId": "", // 服务号可以填写appId
                 //"imgUrl": 'http://www.weixinrs.com/res/share/wtp.jpg',
-				"imgUrl": "http://www.weixinrs.com/upload/auto/2014/06/04/60b2086e3a9b702c49761e1ba40b22be.jpg",
+				"imgUrl": "ups/demopic.jpg",
                 "img_width": "271",
                 "img_height": "271",
                 "link": mysharelink,
@@ -100,133 +134,22 @@
 
 		<div class="count-cont">
 
-			<h3>参与人数</h3>
-
-			<div class="count">1</div>
-
+			<h3>温馨提示:</h3>
+			
+			<div class="count">88</div>
 		</div>
 
 		<div class="title-cont">
 
-			<p class="title">微投票活动开始啦？【所有设置为演示版，请修改】</p>
-
-			<p class="timeout"><img class="clock" src="res/wtp/images/clock.png"><span class="text">距离投票结束还有26天 19小时14分35秒</span></p>
-
+			<p class="title">每人仅限一次投票机会,感谢您的参与.</p>
+			
+			
 		</div>
 
 	</div>
 
-	<div class="cover">
-
-		<img class="line" src="res/wtp/images/ctline.jpg">
-
-		<img class="cimg" src="ups/demopic.jpg">
-
-		<img class="line" src="res/wtp/images/cbline.jpg">
-
-	</div>
-
-	<div class="summary">您觉得我们的公众平台最需要修改的板块是？</div>
-
-	<div class="tip-cont">
-
-		<img class="icon" src="res/wtp/images/tip_icon.png">
-
-		投票后才能看到结果 | 最多选1项
-
-	</div>
-
-	<div class="option-cont">
-
-	
-
-	
-	        
-		<div class="option fn-clear option-statis" data-value="0">
-
-			<div>刮刮卡</div>
-
-			
-
-			<div class="progress"><div data-per="56.52" class="bar bar0" style="width:100%;"></div></div><span class="per" style="left: 102.78px;">1(100%)</span>	
-
-		</div>
-
-		<img class="sep" src="res/wtp/images/option_sep.jpg">
-
-	
-	
-
-
-
-	
-			
-		<div class="option fn-clear option-statis" data-value="0">
-
-			<div>大转盘</div>
-
-			<div class="progress"><div data-per="56.52" class="bar bar0" style="width:0%;"></div></div><span class="per" style="left: 102.78px;">0(0%)</span>	
-
-		</div>
-
-		<img class="sep" src="res/wtp/images/option_sep.jpg">
-
-	
-	
-			
-		<div class="option fn-clear option-statis" data-value="0">
-
-			<div>微官网</div>
-
-			<div class="progress"><div data-per="56.52" class="bar bar0" style="width:0%;"></div></div><span class="per" style="left: 102.78px;">0(0%)</span>	
-
-		</div>
-
-		<img class="sep" src="res/wtp/images/option_sep.jpg">
-
-	
-	
-
-	
-			
-		<div class="option fn-clear option-statis" data-value="0">
-
-			<div>微团购</div>
-
-			<div class="progress"><div data-per="56.52" class="bar bar0" style="width:0%;"></div></div><span class="per" style="left: 102.78px;">0(0%)</span>	
-
-		</div>
-
-		<img class="sep" src="res/wtp/images/option_sep.jpg">
-
-	
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	</div>
-
- 	<p class="page-url">
-
-		<a href="/" target="_blank" class="page-url-link"></a>
-
-	</p>
-
-</div>
+				<a class="next-btn" href="index.html" style="text-decoration:none;">谢谢参与</a>
+		
 
 <div class="mfooter" id="wxgjfooter" style="text-align: center;width: 100%;height: 20px;line-height: 20px;margin-top:10px;">
 <span class="sp2"><a href="http://weixinrs.com" style="color: #5e5e5e;font-size: 12px;"><!--@39MI提供技术支持--></a></span>

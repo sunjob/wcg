@@ -1,4 +1,10 @@
-
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="/struts-tags" prefix="s" %>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,10 +26,10 @@
 	<div class="content-w1">
 		<div class="content-w2">
 			<div class="content">
-				<div class="title">微调研活动开始啦【所有设置为演示版，请修改】</div>
+				<div class="title">微调研活动已结束.</div>
 				<img class="connect" src="res/wdy/images/connect.png">
-				<div class="desc-cont">微调研活动开始啦！</div>
-				<a class="next-btn" href="javascript:;" style="text-decoration:none;">谢谢参与</a>
+				<div class="desc-cont">微调研活动已结束.</div>
+				<a class="next-btn" href="index.html" style="text-decoration:none;">谢谢参与</a>
 			</div>
 		</div>
 	</div>
