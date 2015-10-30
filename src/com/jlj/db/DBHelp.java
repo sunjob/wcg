@@ -11,11 +11,13 @@ public class DBHelp {
 	public static Connection getConnection(){
 		Connection con=null;
 		try {
-//			Class.forName("com.mysql.jdbc.Driver");
+//			Class.forName("com.mysql.jdbc.Driver");//mysql的连接方式
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-//			con=DriverManager.getConnection("jdbc:mysql://58.214.254.196:3306/YXCGDATA", "sa", "gongxiang110!");
-			con=DriverManager.getConnection("jdbc:sqlserver://58.214.254.196:1433;DatabaseName=YXCGDATA", "sa", "gongxiang110!");
-//			con=DriverManager.getConnection("jdbc:sqlserver://10.88.1.117:1433;DatabaseName=YXCGDATA", "sa", "gongxiang110!");
+//			con=DriverManager.getConnection("jdbc:mysql://58.214.254.196:3306/YXCGDATA", "sa", "gongxiang110!");//mysql的连接方式
+			//外网查询方式
+//			con=DriverManager.getConnection("jdbc:sqlserver://58.214.254.196:1433;DatabaseName=YXCGDATA", "sa", "gongxiang110!");
+			//内网查询方式
+			con=DriverManager.getConnection("jdbc:sqlserver://10.88.1.117:1433;DatabaseName=YXCGDATA", "sa", "gongxiang110!");
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
